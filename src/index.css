@@ -1,0 +1,133 @@
+@import "tailwindcss";
+
+@theme {
+  /* FPT University brand colors */
+  --color-primary: #0651A0;
+  --color-primary-light: #008DDE;
+  --color-primary-dark: #053d7a;
+  --color-primary-50: #e6f2fa;
+  --color-primary-100: #b3d9f2;
+  --color-secondary: #008DDE;
+  --color-accent: #F37124;
+  --color-success: #53B848;
+  --color-warning: #F37124;
+  --color-danger: #ef4444;
+  --color-surface: #ffffff;
+  --color-surface-alt: #F4F8FC;
+  --color-sidebar: #042E5C;
+  --color-sidebar-hover: #053d7a;
+  --color-text-primary: #0f172a;
+  --color-text-secondary: #64748b;
+  --color-border: #e2e8f0;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--color-surface-alt);
+  color: var(--color-text-primary);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Kanban: cuộn ngang phía dưới */
+.kanban-scroll {
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: auto;
+  scrollbar-color: #94a3b8 #e2e8f0;
+}
+.kanban-scroll::-webkit-scrollbar {
+  height: 12px;
+}
+.kanban-scroll::-webkit-scrollbar-track {
+  background: #e2e8f0;
+  border-radius: 6px;
+}
+.kanban-scroll::-webkit-scrollbar-thumb {
+  background: #94a3b8;
+  border-radius: 6px;
+}
+.kanban-scroll::-webkit-scrollbar-thumb:hover {
+  background: #64748b;
+}
+
+/* Hide scrollbar but keep scroll */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* docx-preview: isolate CSS, scroll trong khung, không tràn ra ngoài */
+.docx-preview-wrapper {
+  width: 100%;
+  min-width: 0;
+  height: 100%;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.docx-container {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  background: #f1f5f9 !important;
+  padding: 2rem !important;
+  width: 100%;
+  min-height: min-content;
+}
+
+/* Reset DOCX styles - prevent overflow, isolate from app CSS */
+.docx-container * {
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+.docx-container .docx-wrapper,
+.docx-container .docx-viewer-wrapper {
+  background: white !important;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08) !important;
+  margin: 0 auto !important;
+  max-width: 100% !important;
+}
+
+.docx-container .docx,
+.docx-container .docx-viewer {
+  background: white !important;
+  padding: 2rem 2.5rem !important;
+}
+
+/* PDF viewer container - scroll trong khung, không tràn ra ngoài */
+.pdf-preview-wrapper {
+  width: 100%;
+  min-width: 0;
+  height: 100%;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* PDF canvas - tách layer GPU, tránh blur */
+.pdf-preview-wrapper canvas {
+  transform: translateZ(0);
+}
+
+/* Viewer container chuẩn - khóa kích thước, không bao giờ phá layout */
+.viewer-container {
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Chặn div phá layout - KHÔNG áp cho canvas (PDF bị vỡ net) */
+.viewer-container .docx-wrapper,
+.viewer-container .docx-viewer-wrapper {
+  max-width: 100%;
+}
