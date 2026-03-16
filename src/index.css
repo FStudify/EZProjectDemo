@@ -38,21 +38,46 @@ body {
 .kanban-scroll {
   -webkit-overflow-scrolling: touch;
   scrollbar-width: auto;
-  scrollbar-color: #94a3b8 #e2e8f0;
+  scrollbar-color: #c99d81 #f0e2d6;
 }
 .kanban-scroll::-webkit-scrollbar {
   height: 12px;
 }
 .kanban-scroll::-webkit-scrollbar-track {
-  background: #e2e8f0;
+  background: #f0e2d6;
   border-radius: 6px;
 }
 .kanban-scroll::-webkit-scrollbar-thumb {
-  background: #94a3b8;
+  background: #c99d81;
   border-radius: 6px;
 }
 .kanban-scroll::-webkit-scrollbar-thumb:hover {
-  background: #64748b;
+  background: #b68566;
+}
+
+.ez-task-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #c99d81 #f5e9df;
+}
+
+.ez-task-scrollbar::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+.ez-task-scrollbar::-webkit-scrollbar-track {
+  background: #f5e9df;
+  border-radius: 999px;
+}
+
+.ez-task-scrollbar::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #d7a788 0%, #c98f6b 100%);
+  border-radius: 999px;
+  border: 2px solid #f5e9df;
+}
+
+.ez-task-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #ce9773 0%, #bc805b 100%);
 }
 
 /* Hide scrollbar but keep scroll */

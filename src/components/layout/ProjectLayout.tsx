@@ -1,6 +1,5 @@
-import { Outlet, NavLink, useParams } from 'react-router-dom';
+import { Outlet, NavLink } from 'react-router-dom';
 import { Info, CheckSquare, FileText, Video, Users, MessageCircle, TrendingUp } from 'lucide-react';
-import { mockProjects } from '@/mocks';
 
 const projectTabs = [
   { to: '', icon: Info, label: 'Overview' },
@@ -13,33 +12,21 @@ const projectTabs = [
 ] as const;
 
 export default function ProjectLayout() {
-  const { projectId } = useParams<{ projectId: string }>();
-  const project = projectId
-    ? mockProjects.find((p) => p.id === projectId)
-    : undefined;
-
   return (
     <div className="flex flex-col">
-      {/* Project name */}
-      <div className="mb-6">
-        <h2 className="text-2xl font-bold text-text-primary">
-          {project?.name ?? 'Project'}
-        </h2>
-      </div>
-
       {/* Tab navigation */}
-      <nav className="mb-6 border-b border-border">
-        <ul className="flex gap-1">
+      <nav className="mb-3 border-b border-[#E8D8CF]">
+        <ul className="flex flex-wrap gap-1.5">
           {projectTabs.map(({ to, icon: Icon, label }) => (
             <li key={to || 'overview'}>
               <NavLink
                 to={to}
                 end={to === '' || to === 'tasks'}
                 className={({ isActive }) =>
-                  `flex items-center gap-2 border-b-2 px-4 py-3 text-sm font-medium transition-colors ${
+                  `flex items-center gap-2 rounded-t-xl border-b-2 px-3.5 py-2.5 text-sm font-semibold transition-colors ${
                     isActive
-                      ? 'border-primary text-primary'
-                      : 'border-transparent text-text-secondary hover:border-border hover:text-text-primary'
+                      ? 'border-[#D97853] bg-[#FFF3EC] text-[#B86442]'
+                      : 'border-transparent text-[#7A7067] hover:border-[#E8D8CF] hover:bg-[#FFF9F4] hover:text-[#1F1F1F]'
                   }`
                 }
               >

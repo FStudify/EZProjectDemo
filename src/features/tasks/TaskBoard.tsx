@@ -18,8 +18,6 @@ const COLUMNS: { status: TaskStatus; title: string }[] = [
   { status: 'IN_PROGRESS', title: 'In Progress' },
   { status: 'DONE', title: 'Done' },
   { status: 'CLOSED', title: 'Close' },
-  { status: 'ON_HOLD', title: 'On Hold' },
-  { status: 'CANCELLED', title: 'Cancelled' },
 ];
 
 interface Filters {
@@ -55,6 +53,7 @@ export default function TaskBoard() {
   const [showFilters, setShowFilters] = useState(false);
   const [filters, setFilters] = useState<Filters>(emptyFilters);
   const [viewMode, setViewMode] = useState<ViewMode>('kanban');
+  const [now, setNow] = useState(() => Date.now());
   const filterRef = useRef<HTMLDivElement>(null);
 
   const hasActiveFilters = Object.values(filters).some((v) => v !== '');
@@ -100,10 +99,14 @@ export default function TaskBoard() {
   }, [tasks, filters]);
 
   const getTasksByStatus = (status: TaskStatus) =>
-    filteredTasks.filter((t) => t.status === status);
+    filteredTasks.filter((t) => {
+      if (status === 'CLOSED') {
+        return t.status === 'CLOSED' || t.status === 'ON_HOLD' || t.status === 'CANCELLED';
+      }
+      return t.status === status;
+    });
 
   // Reminders: overdue + due in 3 days (for this project)
-  const now = Date.now();
   const startOfToday = new Date();
   startOfToday.setHours(0, 0, 0, 0);
   const endOfDay3 = startOfToday.getTime() + 4 * 24 * 60 * 60 * 1000 - 1;
@@ -156,22 +159,30 @@ export default function TaskBoard() {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, [showFilters]);
 
+  useEffect(() => {
+    const timer = window.setInterval(() => {
+      setNow(Date.now());
+    }, 60_000);
+
+    return () => window.clearInterval(timer);
+  }, []);
+
   const selectClass =
-    'rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-sm text-slate-700 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary';
+    'rounded-lg border border-[#E6D7CC] bg-white px-3 py-1.5 text-sm text-slate-700 focus:border-[#D97853] focus:outline-none focus:ring-1 focus:ring-[#D97853]';
 
   return (
-    <div className="flex h-[calc(100vh-14rem)] gap-0">
+    <div className="flex h-[calc(100dvh-13.35rem)] min-h-[420px] gap-0 overflow-hidden">
       {/* Main content */}
-      <div className="flex min-w-0 flex-1 flex-col overflow-hidden pr-4">
+      <div className="flex min-w-0 flex-1 flex-col overflow-hidden pr-3">
         {/* Header row - nằm ngoài vùng scroll, đứng yên */}
-        <div className="mb-3 flex shrink-0 flex-wrap items-center gap-3">
+        <div className="mb-2 flex shrink-0 flex-wrap items-center gap-2.5">
           <div className="flex items-center gap-3">
-            <div className="flex rounded-lg border border-slate-200 p-0.5">
+            <div className="flex rounded-lg border border-[#E5D6CB] bg-[#FCF5EF] p-0.5">
               <button
                 type="button"
                 onClick={() => setViewMode('kanban')}
-                className={`flex items-center gap-1.5 rounded-md px-2.5 py-1 text-sm font-medium transition-colors ${
-                  viewMode === 'kanban' ? 'bg-primary-50 text-primary' : 'text-slate-600 hover:bg-slate-50'
+                className={`flex items-center gap-1.5 rounded-md px-2.5 py-1 text-[13px] font-medium transition-colors ${
+                  viewMode === 'kanban' ? 'bg-[#FFF1E8] text-[#B86442]' : 'text-slate-600 hover:bg-[#FBF3ED]'
                 }`}
               >
                 <LayoutGrid className="h-4 w-4" /> Kanban
@@ -179,8 +190,8 @@ export default function TaskBoard() {
               <button
                 type="button"
                 onClick={() => setViewMode('timeline')}
-                className={`flex items-center gap-1.5 rounded-md px-2.5 py-1 text-sm font-medium transition-colors ${
-                  viewMode === 'timeline' ? 'bg-primary-50 text-primary' : 'text-slate-600 hover:bg-slate-50'
+                className={`flex items-center gap-1.5 rounded-md px-2.5 py-1 text-[13px] font-medium transition-colors ${
+                  viewMode === 'timeline' ? 'bg-[#FFF1E8] text-[#B86442]' : 'text-slate-600 hover:bg-[#FBF3ED]'
                 }`}
               >
                 <GanttChart className="h-4 w-4" /> Timeline
@@ -188,8 +199,8 @@ export default function TaskBoard() {
               <button
                 type="button"
                 onClick={() => setViewMode('dependencies')}
-                className={`flex items-center gap-1.5 rounded-md px-2.5 py-1 text-sm font-medium transition-colors ${
-                  viewMode === 'dependencies' ? 'bg-primary-50 text-primary' : 'text-slate-600 hover:bg-slate-50'
+                className={`flex items-center gap-1.5 rounded-md px-2.5 py-1 text-[13px] font-medium transition-colors ${
+                  viewMode === 'dependencies' ? 'bg-[#FFF1E8] text-[#B86442]' : 'text-slate-600 hover:bg-[#FBF3ED]'
                 }`}
               >
                 <GitBranch className="h-4 w-4" /> Dependencies
@@ -197,8 +208,8 @@ export default function TaskBoard() {
               <button
                 type="button"
                 onClick={() => setViewMode('reminders')}
-                className={`flex items-center gap-1.5 rounded-md px-2.5 py-1 text-sm font-medium transition-colors ${
-                  viewMode === 'reminders' ? 'bg-primary-50 text-primary' : 'text-slate-600 hover:bg-slate-50'
+                className={`flex items-center gap-1.5 rounded-md px-2.5 py-1 text-[13px] font-medium transition-colors ${
+                  viewMode === 'reminders' ? 'bg-[#FFF1E8] text-[#B86442]' : 'text-slate-600 hover:bg-[#FBF3ED]'
                 }`}
               >
                 <AlertTriangle className="h-4 w-4" /> Reminders
@@ -212,22 +223,22 @@ export default function TaskBoard() {
               <button
                 type="button"
                 onClick={() => setShowFilters((p) => !p)}
-                className={`inline-flex items-center gap-1.5 rounded-lg border px-3 py-1.5 text-sm font-medium transition-colors ${
+                className={`inline-flex items-center gap-1.5 rounded-lg border px-3 py-1.5 text-[13px] font-medium transition-colors ${
                   hasActiveFilters
-                    ? 'border-primary/20 bg-primary-50 text-primary'
-                    : 'border-slate-300 text-slate-600 hover:bg-slate-50'
+                    ? 'border-[#EFCBB7] bg-[#FFF1E8] text-[#B86442]'
+                    : 'border-[#E4D5CA] text-slate-600 hover:bg-[#FBF3ED]'
                 }`}
               >
                 <Filter className="h-4 w-4" />
                 Filters
                 {hasActiveFilters && (
-                  <span className="ml-1 flex h-5 w-5 items-center justify-center rounded-full bg-primary text-xs text-white">
+                  <span className="ml-1 flex h-5 w-5 items-center justify-center rounded-full bg-[#D97853] text-xs text-white">
                     {Object.values(filters).filter((v) => v !== '').length}
                   </span>
                 )}
               </button>
               {showFilters && (
-                <div className="absolute right-full top-0 z-50 mr-2 min-w-[320px] rounded-xl border border-slate-200 bg-white p-3 shadow-lg">
+                <div className="absolute right-full top-0 z-50 mr-2 min-w-[320px] rounded-xl border border-[#E6D8CE] bg-[#FFFCFA] p-3 shadow-[0_20px_32px_-28px_rgba(61,38,25,0.7)]">
                   <div className="mb-2 flex items-center justify-between">
                     <span className="text-sm font-semibold text-slate-700">Filters</span>
                     {hasActiveFilters && (
@@ -312,13 +323,23 @@ export default function TaskBoard() {
                 </div>
               )}
             </div>
-            <Button variant="primary" size="sm" onClick={() => setIsAddOpen(true)}>
+            <Button
+              variant="primary"
+              size="sm"
+              onClick={() => setIsAddOpen(true)}
+              className="!bg-[#D97853] !py-1.5 !text-[13px] hover:!bg-[#C96B48]"
+            >
               <Plus className="mr-1 h-4 w-4" /> Add Task
             </Button>
           </div>
           )}
           {viewMode === 'dependencies' && (
-          <Button variant="primary" size="sm" onClick={() => setIsAddOpen(true)}>
+          <Button
+            variant="primary"
+            size="sm"
+            onClick={() => setIsAddOpen(true)}
+            className="!bg-[#D97853] !py-1.5 !text-[13px] hover:!bg-[#C96B48]"
+          >
             <Plus className="mr-1 h-4 w-4" /> Add Task
           </Button>
           )}
@@ -327,12 +348,12 @@ export default function TaskBoard() {
         {/* Kanban, Timeline, or Reminders view */}
         {viewMode === 'reminders' ? (
           <div className="flex flex-1 gap-6 overflow-hidden min-h-0">
-            <div className="flex-1 min-w-0 flex flex-col bg-white rounded-xl border border-slate-200 overflow-hidden">
-              <h3 className="px-4 py-3 border-b border-slate-100 flex items-center gap-2 shrink-0 text-base font-semibold text-slate-900">
+            <div className="flex min-w-0 flex-1 flex-col overflow-hidden rounded-xl border border-[#E7D9CF] bg-[#FFFDFB]">
+              <h3 className="flex shrink-0 items-center gap-2 border-b border-[#F0E5DD] px-4 py-3 text-base font-semibold text-slate-900">
                 <AlertTriangle className="h-4 w-4 text-rose-500" />
                 Overdue ({overdueTasks.length})
               </h3>
-              <div className="flex-1 overflow-auto p-4">
+              <div className="ez-task-scrollbar flex-1 overflow-auto p-4">
                 {overdueTasks.length === 0 ? (
                   <p className="text-sm text-slate-500">No overdue tasks.</p>
                 ) : (
@@ -368,12 +389,12 @@ export default function TaskBoard() {
                 )}
               </div>
             </div>
-            <div className="flex-1 min-w-0 flex flex-col bg-white rounded-xl border border-slate-200 overflow-hidden">
-              <h3 className="px-4 py-3 border-b border-slate-100 flex items-center gap-2 shrink-0 text-base font-semibold text-slate-900">
+            <div className="flex min-w-0 flex-1 flex-col overflow-hidden rounded-xl border border-[#E7D9CF] bg-[#FFFDFB]">
+              <h3 className="flex shrink-0 items-center gap-2 border-b border-[#F0E5DD] px-4 py-3 text-base font-semibold text-slate-900">
                 <Clock className="h-4 w-4 text-amber-500" />
                 Due in 3 days ({dueSoonTasks.length})
               </h3>
-              <div className="flex-1 overflow-auto p-4">
+              <div className="ez-task-scrollbar flex-1 overflow-auto p-4">
                 {dueSoonTasks.length === 0 ? (
                   <p className="text-sm text-slate-500">No tasks due soon.</p>
                 ) : (
@@ -423,8 +444,8 @@ export default function TaskBoard() {
             />
           </div>
         ) : viewMode === 'kanban' ? (
-          <div className="kanban-scroll flex flex-1 min-h-0 overflow-x-auto overflow-y-hidden pb-4">
-            <div className="flex gap-3 min-w-max">
+          <div className="kanban-scroll ez-task-scrollbar flex flex-1 min-h-0 overflow-x-auto overflow-y-hidden pb-2">
+            <div className="grid w-full min-w-[1020px] grid-cols-4 gap-2.5">
               {COLUMNS.map(({ status, title }) => (
                 <TaskColumn
                   key={status}
@@ -442,7 +463,7 @@ export default function TaskBoard() {
             </div>
           </div>
         ) : (
-          <div className="flex-1 overflow-y-auto pb-4">
+          <div className="ez-task-scrollbar flex-1 overflow-y-auto pb-4">
             {project && (
               <TaskTimeline
                 tasks={filteredTasks}

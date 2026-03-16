@@ -12,11 +12,12 @@ const ZOOM_MAX = 2;
 const ZOOM_STEP = 0.15;
 
 const STATUS_COLORS: Record<string, string> = {
-  DONE: 'bg-emerald-500',
-  IN_PROGRESS: 'bg-amber-500',
-  TODO: 'bg-blue-500',
-  ON_HOLD: 'bg-orange-400',
-  CANCELLED: 'bg-slate-300',
+  DONE: 'bg-[#6EBF55]',
+  CLOSED: 'bg-[#AFA59B]',
+  IN_PROGRESS: 'bg-[#D97853]',
+  TODO: 'bg-[#E9AC74]',
+  ON_HOLD: 'bg-[#CF9A6D]',
+  CANCELLED: 'bg-[#C2B2A8]',
 };
 
 function assignLayers(tasks: Task[]): Map<string, number> {
@@ -305,8 +306,8 @@ export default function TaskDependencyGraph({
 
   if (tasks.length === 0) {
     return (
-      <div className="rounded-xl border-2 border-dashed border-slate-200 bg-slate-50/50 py-16 text-center">
-        <p className="text-sm text-slate-600">No tasks in this project</p>
+      <div className="rounded-2xl border-2 border-dashed border-[#E6D3C6] bg-[linear-gradient(135deg,#FFF9F4_0%,#FBEFE5_100%)] py-16 text-center shadow-[0_14px_26px_-26px_rgba(89,55,33,0.65)]">
+        <p className="text-sm font-medium text-[#7D695A]">No tasks in this project</p>
       </div>
     );
   }
@@ -318,11 +319,11 @@ export default function TaskDependencyGraph({
   return (
     <div
       ref={containerRef}
-      className="relative flex h-[calc(100vh-16rem)] min-h-[360px] min-w-0 max-w-full flex-col overflow-hidden rounded-xl border border-slate-200 bg-slate-50/50"
+      className="relative flex h-[calc(100vh-16rem)] min-h-[360px] min-w-0 max-w-full flex-col overflow-hidden rounded-2xl border border-[#E5D6CC] bg-[linear-gradient(180deg,#FFFDFB_0%,#FBF4EE_100%)] shadow-[0_18px_36px_-28px_rgba(58,36,24,0.65)]"
     >
       {/* Zoom controls */}
-      <div className="flex shrink-0 items-center justify-between border-b border-slate-200 bg-white px-3 py-2">
-        <span className="text-xs font-medium text-slate-500">
+      <div className="flex shrink-0 items-center justify-between border-b border-[#E8D9CF] bg-[#F7F1EB] px-3 py-2.5">
+        <span className="text-xs font-semibold uppercase tracking-[0.08em] text-[#8A7769]">
           Zoom: {Math.round(scale * 100)}%
         </span>
         <div className="flex items-center gap-1">
@@ -330,7 +331,7 @@ export default function TaskDependencyGraph({
             type="button"
             onClick={handleZoomOut}
             disabled={scale <= ZOOM_MIN}
-            className="rounded-lg p-2 text-slate-600 hover:bg-slate-100 disabled:opacity-40 disabled:hover:bg-transparent"
+            className="rounded-xl p-2 text-[#8A7769] transition-colors hover:bg-[#EEE2D7] hover:text-[#704C38] disabled:opacity-40 disabled:hover:bg-transparent disabled:hover:text-[#8A7769]"
             title="Thu nhỏ"
           >
             <ZoomOut className="h-4 w-4" />
@@ -338,7 +339,7 @@ export default function TaskDependencyGraph({
           <button
             type="button"
             onClick={handleZoomReset}
-            className="rounded-lg p-2 text-slate-600 hover:bg-slate-100"
+            className="rounded-xl p-2 text-[#8A7769] transition-colors hover:bg-[#EEE2D7] hover:text-[#704C38]"
             title="Vừa màn hình"
           >
             <Maximize2 className="h-4 w-4" />
@@ -347,7 +348,7 @@ export default function TaskDependencyGraph({
             type="button"
             onClick={handleZoomIn}
             disabled={scale >= ZOOM_MAX}
-            className="rounded-lg p-2 text-slate-600 hover:bg-slate-100 disabled:opacity-40 disabled:hover:bg-transparent"
+            className="rounded-xl p-2 text-[#8A7769] transition-colors hover:bg-[#EEE2D7] hover:text-[#704C38] disabled:opacity-40 disabled:hover:bg-transparent disabled:hover:text-[#8A7769]"
             title="Phóng to"
           >
             <ZoomIn className="h-4 w-4" />
@@ -358,9 +359,14 @@ export default function TaskDependencyGraph({
       {/* Graph viewport - constrained, scrollable when zoomed */}
       <div
         ref={scrollContainerRef}
-        className="relative flex-1 min-h-0 overflow-auto p-4"
+        className="ez-task-scrollbar relative flex-1 min-h-0 overflow-auto p-4"
         onWheel={handleWheel}
-        style={{ touchAction: 'none' }}
+        style={{
+          touchAction: 'none',
+          backgroundImage:
+            'radial-gradient(circle at 1px 1px, rgba(160,122,96,0.18) 1px, transparent 0)',
+          backgroundSize: '18px 18px',
+        }}
       >
         <div
           className="relative"
@@ -393,7 +399,7 @@ export default function TaskDependencyGraph({
             refY="3.5"
             orient="auto"
           >
-            <polygon points="0 0, 10 3.5, 0 7" fill="currentColor" className="text-slate-400" />
+            <polygon points="0 0, 10 3.5, 0 7" fill="#CFB8A8" />
           </marker>
         </defs>
         <g transform={`translate(${padding}, ${padding})`}>
@@ -414,7 +420,7 @@ export default function TaskDependencyGraph({
                 fill="none"
                 stroke="currentColor"
                 strokeWidth="2"
-                className="text-slate-400"
+                className="text-[#CEB9AA]"
                 markerEnd="url(#arrowhead)"
               />
             );
@@ -432,7 +438,7 @@ export default function TaskDependencyGraph({
               stroke="currentColor"
               strokeWidth="2"
               strokeDasharray="4 4"
-              className="text-primary"
+              className="text-[#D97853]"
               markerEnd="url(#arrowhead)"
             />
             );
@@ -470,23 +476,23 @@ export default function TaskDependencyGraph({
                 }
               }}
             >
-              <div className="flex items-center gap-2 rounded-lg border-2 border-slate-200 bg-white p-3 shadow-sm hover:shadow-md hover:border-primary/30 transition-all">
-                <div className="cursor-grab active:cursor-grabbing shrink-0 text-slate-400 hover:text-slate-600 p-0.5 -m-0.5">
+              <div className="flex items-center gap-2 rounded-xl border border-[#E8D8CD] bg-[linear-gradient(180deg,#FFFFFF_0%,#FFF8F3_100%)] p-3 shadow-[0_10px_18px_-16px_rgba(74,44,27,0.85)] transition-all hover:border-[#D9B29B] hover:shadow-[0_14px_24px_-16px_rgba(74,44,27,0.88)]">
+                <div className="-m-0.5 shrink-0 cursor-grab p-0.5 text-[#B89D8C] hover:text-[#8A664F] active:cursor-grabbing">
                   <GripVertical className="h-4 w-4" />
                 </div>
                 <div className="flex-1 min-w-0 flex items-center gap-2">
                   <span className={`shrink-0 w-2 h-2 rounded-full ${statusColor}`} />
                   <div className="min-w-0">
-                    <p className="font-medium text-slate-900 text-sm truncate">
+                    <p className="truncate text-sm font-semibold text-[#202020]">
                       {task.title}
                     </p>
-                    <div className="flex items-center gap-1.5 mt-0.5">
+                    <div className="mt-0.5 flex items-center gap-1.5">
                       <ProjectMemberAvatar
                         member={task.assignee}
                         projectMembers={projectMembers}
                         size="sm"
                       />
-                      <span className="text-xs text-slate-500 truncate">
+                      <span className="truncate text-xs text-[#7A6A5F]">
                         {task.assignee.name}
                       </span>
                     </div>
@@ -495,7 +501,7 @@ export default function TaskDependencyGraph({
                 <button
                   type="button"
                   data-drag-handle
-                  className="shrink-0 p-1 rounded hover:bg-primary-50 text-slate-400 hover:text-primary transition-colors"
+                  className="shrink-0 rounded-md p-1 text-[#B58F78] transition-colors hover:bg-[#FBEBDD] hover:text-[#BE6A46]"
                   title="Drag to create dependency"
                   onMouseDown={(e) => handleLinkStart(e, task.id)}
                 >

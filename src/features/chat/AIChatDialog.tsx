@@ -128,30 +128,31 @@ export default function AIChatDialog() {
         onPointerDown={handlePointerDown}
         onPointerMove={handlePointerMove}
         onPointerUp={handlePointerUp}
-        className={`flex h-14 w-14 cursor-grab items-center justify-center rounded-full bg-violet-600 text-white shadow-2xl transition-shadow hover:bg-violet-700 active:cursor-grabbing ${
-          isOpen ? 'ring-4 ring-violet-300' : 'animate-pulse'
+        className={`group relative flex h-14 w-14 cursor-grab items-center justify-center rounded-2xl bg-[linear-gradient(145deg,#163B72,#274C7D)] text-white shadow-[0_18px_34px_-14px_rgba(22,59,114,0.8)] transition-all duration-200 hover:-translate-y-[1px] hover:shadow-[0_22px_38px_-16px_rgba(22,59,114,0.85)] active:cursor-grabbing ${
+          isOpen ? 'ring-4 ring-[#B8C9E2]' : ''
         }`}
         aria-label={isOpen ? 'Close AI chat' : 'Open AI chat'}
       >
         <Bot className="h-7 w-7 pointer-events-none" aria-hidden />
+        <span className="animate-ez-green-pulse pointer-events-none absolute -right-0.5 -top-0.5 inline-flex h-3.5 w-3.5 rounded-full border-2 border-white bg-[#6DBE45] shadow-[0_0_0_4px_rgba(109,190,69,0.22)]" />
       </button>
 
       {/* Chat window */}
       {isOpen && (
         <div
           style={chatStyle}
-          className="flex h-[500px] w-96 flex-col overflow-hidden rounded-2xl border border-white/20 bg-white/95 shadow-2xl backdrop-blur-xl"
+          className="flex h-[500px] w-96 flex-col overflow-hidden rounded-2xl border border-[#D5E1F0] bg-white/95 shadow-[0_30px_48px_-24px_rgba(22,59,114,0.45)] backdrop-blur-xl"
         >
           {/* Header */}
-          <div className="flex items-center justify-between border-b border-slate-200/50 bg-white/50 px-4 py-3">
+          <div className="flex items-center justify-between border-b border-[#274C7D]/20 bg-[linear-gradient(135deg,#163B72,#274C7D)] px-4 py-3 text-white">
             <div className="flex items-center gap-2">
-              <Sparkles className="h-5 w-5 text-violet-600" aria-hidden />
-              <h3 className="text-sm font-semibold text-slate-900">AI Assistant</h3>
+              <Sparkles className="h-5 w-5 text-[#DCE8F7]" aria-hidden />
+              <h3 className="text-sm font-semibold text-white">AI Assistant</h3>
             </div>
             <button
               type="button"
               onClick={() => setIsOpen(false)}
-              className="rounded-lg p-1.5 text-slate-500 hover:bg-slate-100 hover:text-slate-700"
+              className="rounded-lg p-1.5 text-white/80 transition-colors hover:bg-white/10 hover:text-white"
               aria-label="Close"
             >
               <X className="h-5 w-5" aria-hidden />
@@ -170,7 +171,7 @@ export default function AIChatDialog() {
           </div>
 
           {/* Input */}
-          <div className="border-t border-slate-200/50 bg-white/50 p-4">
+          <div className="border-t border-[#DCE4F0] bg-white/70 p-4">
             <div className="flex gap-2">
               <input
                 type="text"
@@ -178,13 +179,13 @@ export default function AIChatDialog() {
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && !e.shiftKey && handleSend()}
                 placeholder="Ask me anything..."
-                className="flex-1 rounded-xl border border-slate-200 px-4 py-2.5 text-sm placeholder:text-slate-400 focus:border-violet-400 focus:outline-none focus:ring-2 focus:ring-violet-400/20"
+                className="flex-1 rounded-xl border border-[#D6DFEC] px-4 py-2.5 text-sm placeholder:text-slate-400 focus:border-[#274C7D] focus:outline-none focus:ring-2 focus:ring-[#274C7D]/20"
               />
               <Button
                 variant="primary"
                 size="md"
                 onClick={handleSend}
-                className="bg-violet-600 px-4 hover:bg-violet-700"
+                className="bg-[#163B72] px-4 hover:bg-[#0F2D57]"
                 aria-label="Send"
               >
                 <Send className="h-4 w-4" aria-hidden />

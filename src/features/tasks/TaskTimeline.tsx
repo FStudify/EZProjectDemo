@@ -24,12 +24,12 @@ function getTaskBarStyle(
   const width = Math.max(3, ((taskEnd - taskStart) / rangeTotal) * 100);
 
   const statusColors: Record<TaskStatus, string> = {
-    DONE: 'bg-emerald-500',
-    CLOSED: 'bg-slate-500',
-    IN_PROGRESS: 'bg-primary',
-    TODO: 'bg-amber-400',
-    ON_HOLD: 'bg-slate-400',
-    CANCELLED: 'bg-slate-300',
+    DONE: 'bg-[linear-gradient(90deg,#84D062,#6DBE45)]',
+    CLOSED: 'bg-[#AAA39A]',
+    IN_PROGRESS: 'bg-[linear-gradient(90deg,#E18A66,#D97853)]',
+    TODO: 'bg-[linear-gradient(90deg,#F0BA86,#E89B78)]',
+    ON_HOLD: 'bg-[#D5A276]',
+    CANCELLED: 'bg-[#CBBCAF]',
   };
   return {
     left,
@@ -79,7 +79,7 @@ export default function TaskTimeline({
   return (
     <div className="space-y-4">
       {/* Project deadline */}
-      <div className="rounded-lg border border-amber-200 bg-amber-50 px-4 py-2 text-sm text-amber-800">
+      <div className="rounded-xl border border-[#F0D4C2] bg-[linear-gradient(135deg,#FFF2E7_0%,#FEE9DD_100%)] px-4 py-2.5 text-sm text-[#8A563A] shadow-[0_10px_20px_-18px_rgba(145,88,56,0.62)]">
         <strong>Project deadline:</strong>{' '}
         {endDate.toLocaleDateString(undefined, {
           weekday: 'short',
@@ -90,23 +90,23 @@ export default function TaskTimeline({
       </div>
 
       {/* Timeline with grid */}
-      <div className="rounded-xl border-2 border-slate-200 bg-white overflow-hidden">
+      <div className="overflow-hidden rounded-2xl border border-[#E7D8CE] bg-[linear-gradient(180deg,#FFFDFB_0%,#FCF5EF_100%)] shadow-[0_16px_30px_-24px_rgba(44,27,18,0.55)]">
         {/* Week headers - grid cells */}
         <div
-          className="grid border-b-2 border-slate-200 bg-slate-50"
+          className="grid border-b border-[#E8D9CF] bg-[#F7F0EA]"
           style={{ gridTemplateColumns: `180px repeat(${weeks.length}, minmax(64px, 1fr))` }}
         >
-          <div className="px-3 py-2.5 text-xs font-semibold text-slate-600 border-r border-slate-200">
+          <div className="border-r border-[#E8D9CF] px-3 py-2.5 text-xs font-semibold uppercase tracking-[0.08em] text-[#857468]">
             Task
           </div>
           {weeks.map((w, i) => (
             <div
               key={i}
-              className="px-1 py-2 text-center text-xs font-medium text-slate-600 border-r border-slate-200 last:border-r-0"
+              className="border-r border-[#E8D9CF] px-1 py-2 text-center text-xs font-medium text-[#7A6B60] last:border-r-0"
             >
               {w.label}
               <br />
-              <span className="text-[10px] text-slate-400">
+              <span className="text-[10px] text-[#A39489]">
                 {w.date.toLocaleDateString(undefined, { month: 'short', day: 'numeric' })}
               </span>
             </div>
@@ -126,23 +126,27 @@ export default function TaskTimeline({
           return (
             <div
               key={task.id}
-              className="grid border-b border-slate-200 last:border-b-0 hover:bg-slate-50/70 transition-colors cursor-pointer"
+              className="grid cursor-pointer border-b border-[#ECE0D7] transition-colors last:border-b-0 hover:bg-[#FCF2EB]/80"
               style={{ gridTemplateColumns: `180px repeat(${weeks.length}, minmax(64px, 1fr))` }}
               onClick={() => onTaskClick?.(task)}
             >
-              <div className="flex items-center gap-2 px-3 py-2.5 min-w-0 border-r border-slate-200">
+              <div className="flex min-w-0 items-center gap-2 border-r border-[#E8D9CF] px-3 py-2.5">
                 <ProjectMemberAvatar member={task.assignee} projectMembers={projectMembers} size="sm" />
                 <div className="min-w-0">
-                  <p className="text-sm font-medium text-slate-900 truncate">
+                  <p className="truncate text-sm font-semibold text-[#1F1F1F]">
                     {task.title}
                   </p>
-                  <p className="text-xs text-slate-500">
+                  <p className="text-xs text-[#7F7167]">
                     {task.assignee.name}
                     {isInProgress && (
-                      <span className="ml-1 text-indigo-600 font-medium">• In progress</span>
+                      <span className="ml-1 rounded-full bg-[#FFF0E6] px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-[0.06em] text-[#BE6A46]">
+                        In progress
+                      </span>
                     )}
                     {isUpcoming && (
-                      <span className="ml-1 text-amber-600 font-medium">• Upcoming</span>
+                      <span className="ml-1 rounded-full bg-[#FDF2E4] px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-[0.06em] text-[#AF7A44]">
+                        Upcoming
+                      </span>
                     )}
                   </p>
                 </div>
@@ -157,13 +161,13 @@ export default function TaskTimeline({
                   {weeks.map((_, i) => (
                     <div
                       key={i}
-                      className="flex-1 min-w-0 border-r border-slate-200 last:border-r-0"
+                      className="flex-1 min-w-0 border-r border-[#EDE1D8] last:border-r-0"
                     />
                   ))}
                 </div>
                 {/* Task bar */}
                 <div
-                  className={`absolute top-1/2 -translate-y-1/2 h-7 rounded ${color} min-w-[28px] transition-all hover:opacity-90 hover:ring-2 hover:ring-primary/50 cursor-pointer`}
+                  className={`absolute top-1/2 h-7 min-w-[28px] -translate-y-1/2 rounded-full ${color} shadow-[0_8px_14px_-10px_rgba(45,29,20,0.45)] transition-all hover:opacity-95 hover:ring-2 hover:ring-[#D97853]/35 cursor-pointer`}
                   style={{
                     left: `${left}%`,
                     width: `${width}%`,

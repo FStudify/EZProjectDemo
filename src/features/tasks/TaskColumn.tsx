@@ -3,12 +3,12 @@ import type { Task, TaskStatus, ProjectMember } from '@/types';
 import TaskCard from './TaskCard';
 
 const statusColors: Record<TaskStatus, string> = {
-  TODO: 'bg-blue-500',
-  IN_PROGRESS: 'bg-amber-500',
-  DONE: 'bg-emerald-500',
-  CLOSED: 'bg-slate-500',
-  ON_HOLD: 'bg-orange-400',
-  CANCELLED: 'bg-red-400',
+  TODO: 'bg-[#E6A86F]',
+  IN_PROGRESS: 'bg-[#D97853]',
+  DONE: 'bg-[#6EBC53]',
+  CLOSED: 'bg-[#AFA59C]',
+  ON_HOLD: 'bg-[#CD976B]',
+  CANCELLED: 'bg-[#C3B4A9]',
 };
 
 interface TaskColumnProps {
@@ -59,25 +59,25 @@ export default function TaskColumn({
       onDragOver={handleDragOver}
       onDragLeave={handleDragLeave}
       onDrop={handleDrop}
-      className={`flex w-[336px] flex-shrink-0 flex-col rounded-xl border-2 min-h-[320px] transition-colors ${
+      className={`flex w-full min-w-0 flex-col rounded-xl border-2 min-h-[300px] transition-colors ${
         isDragOver
-          ? 'border-primary/40 bg-primary-50/50'
-          : 'border-slate-200 bg-slate-50'
+          ? 'border-[#D97853]/40 bg-[#FFF4EC]'
+          : 'border-[#E7D7CC] bg-[#FCF7F2]'
       }`}
     >
-      <div className="p-3 border-b border-slate-200">
+      <div className="border-b border-[#E7D7CC] px-3 py-2.5">
         <div className="flex items-center gap-2">
           <span
             className={`w-2.5 h-2.5 rounded-full ${statusColors[status]}`}
             aria-hidden
           />
           <h3 className="text-sm font-semibold text-slate-900">{title}</h3>
-          <span className="ml-auto text-xs text-slate-500 bg-slate-200 px-2 py-0.5 rounded-full">
+          <span className="ml-auto rounded-full bg-[#E9DFD7] px-2 py-0.5 text-xs text-slate-500">
             {tasks.length}
           </span>
         </div>
       </div>
-      <div className="flex-1 p-2 space-y-2 overflow-y-auto min-h-0">
+      <div className="ez-task-scrollbar flex-1 min-h-0 space-y-1.5 overflow-y-auto p-1.5">
         {tasks.map((task) => (
           <TaskCard
             key={task.id}
@@ -87,7 +87,7 @@ export default function TaskColumn({
           />
         ))}
         {tasks.length === 0 && (
-          <div className="flex flex-col items-center justify-center py-8 text-slate-400 border-2 border-dashed border-slate-200 rounded-lg">
+          <div className="flex flex-col items-center justify-center rounded-lg border-2 border-dashed border-[#E6D7CC] py-6 text-slate-400">
             <p className="text-xs">Drop here</p>
           </div>
         )}

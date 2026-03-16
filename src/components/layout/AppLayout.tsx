@@ -35,7 +35,7 @@ export default function AppLayout() {
 
   return (
     <SidebarProvider>
-      <div className="flex min-h-screen bg-surface-alt">
+      <div className="flex min-h-screen bg-[linear-gradient(180deg,#FEFBF8_0%,#F8F1EA_100%)] text-[#1F1F1F]">
         <Sidebar />
         <AIChatDialog />
         <AppMain title={title} />
@@ -54,8 +54,10 @@ function AppMain({ title }: { title: string }) {
       }`}
     >
       <Topbar title={title} />
-      <div className="flex-1 min-w-0 overflow-x-auto overflow-y-auto p-6">
-        <Outlet />
+      <div className="flex-1 min-w-0 overflow-x-auto overflow-y-auto bg-[linear-gradient(180deg,rgba(255,255,255,0.65)_0%,rgba(251,245,239,0.96)_100%)] p-5 lg:p-7">
+        <div className="mx-auto w-full max-w-[1420px]">
+          <Outlet />
+        </div>
       </div>
     </main>
   );
