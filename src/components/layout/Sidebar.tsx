@@ -40,44 +40,58 @@ export default function Sidebar() {
   const basePath = hasProject ? `/projects/${activeProjectId}` : '';
 
   const navLinkBase = (isActive: boolean) =>
-    `flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors ${
-      isActive ? 'bg-primary/20 text-primary-light' : 'text-white/90 hover:bg-sidebar-hover'
+    `group flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-semibold transition-all duration-200 ${
+      isActive
+        ? 'bg-[#FFF5EC] text-[#8B4A2F] shadow-[0_16px_24px_-18px_rgba(45,18,4,0.55)]'
+        : 'text-[#FFF8F2] hover:bg-white/18 hover:text-white'
     }`;
 
   const navLinkCollapsed = (isActive: boolean) =>
-    `flex items-center justify-center rounded-lg p-2.5 text-sm font-medium transition-colors ${
-      isActive ? 'bg-primary/20 text-primary-light' : 'text-white/90 hover:bg-sidebar-hover'
+    `group flex items-center justify-center rounded-xl p-2.5 text-sm font-semibold transition-all duration-200 ${
+      isActive
+        ? 'bg-[#FFF5EC] text-[#8B4A2F] shadow-[0_16px_24px_-18px_rgba(45,18,4,0.55)]'
+        : 'text-[#FFF8F2] hover:bg-white/18 hover:text-white'
     }`;
 
   const subNavLinkBase = (isActive: boolean) =>
-    `flex items-center gap-2.5 rounded-lg px-3 py-2 text-[13px] font-medium transition-colors hover:bg-sidebar-hover ${
-      isActive ? 'bg-primary/20 text-primary-light' : 'text-white/70 hover:text-white'
+    `flex items-center gap-2.5 rounded-lg border px-3 py-2 text-[13px] font-medium transition-all duration-200 ${
+      isActive
+        ? 'border-[#F7D9C5] bg-[#FFF7F0] text-[#8B4A2F] shadow-[0_12px_20px_-18px_rgba(45,18,4,0.52)]'
+        : 'border-transparent text-[#FCEDE1] hover:border-white/20 hover:bg-white/14 hover:text-[#FFFDFB]'
     }`;
 
   const subNavLinkCollapsed = (isActive: boolean) =>
-    `flex items-center justify-center rounded-lg p-2 text-[13px] font-medium transition-colors hover:bg-sidebar-hover ${
-      isActive ? 'bg-primary/20 text-primary-light' : 'text-white/70 hover:text-white'
+    `flex items-center justify-center rounded-lg border p-2 text-[13px] font-medium transition-all duration-200 ${
+      isActive
+        ? 'border-[#F7D9C5] bg-[#FFF7F0] text-[#8B4A2F]'
+        : 'border-transparent text-[#FCEDE1] hover:border-white/20 hover:bg-white/14 hover:text-[#FFFDFB]'
     }`;
 
   return (
     <aside
-      className={`fixed left-0 top-0 z-40 flex h-full flex-col bg-sidebar text-white transition-all duration-200 ease-in-out ${
+      className={`fixed left-0 top-0 z-40 flex h-full flex-col border-r border-[#BA724B] bg-[linear-gradient(180deg,#C8774D_0%,#B86843_34%,#A75C3A_100%)] text-[#FFF8F2] shadow-[0_16px_34px_-20px_rgba(59,27,13,0.68)] transition-all duration-200 ease-in-out ${
         collapsed ? 'w-[72px]' : 'w-64'
       }`}
     >
       {/* Logo / Toggle */}
       <div
-        className={`flex h-16 shrink-0 items-center border-b border-white/10 ${
+        className={`flex h-[72px] shrink-0 items-center border-b border-white/18 ${
           collapsed ? 'justify-center px-0' : 'gap-3 px-4'
         }`}
       >
-        {!collapsed && <GraduationCap className="h-8 w-8 shrink-0 text-primary-light" aria-hidden />}
+        {!collapsed && (
+          <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#FFF1E4] text-[#B6653F] shadow-[0_14px_24px_-18px_rgba(31,12,3,0.7)]">
+            <GraduationCap className="h-5 w-5" aria-hidden />
+          </span>
+        )}
         {collapsed ? (
           <span title="EZProject">
-            <GraduationCap className="h-8 w-8 text-primary-light" aria-hidden />
+            <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#FFF1E4] text-[#B6653F] shadow-[0_14px_24px_-18px_rgba(31,12,3,0.7)]">
+              <GraduationCap className="h-5 w-5" aria-hidden />
+            </span>
           </span>
         ) : (
-          <span className="text-xl font-bold tracking-tight">EZProject</span>
+          <span className="text-[28px] font-extrabold tracking-[-0.02em] text-[#FFFDF9]">EZProject</span>
         )}
       </div>
 
@@ -85,7 +99,7 @@ export default function Sidebar() {
       <button
         type="button"
         onClick={toggle}
-        className="absolute -right-3 top-20 z-50 flex h-6 w-6 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-600 shadow-md hover:bg-slate-50 hover:text-slate-900"
+        className="absolute -right-3 top-[72px] z-50 flex h-6 w-6 -translate-y-1/2 items-center justify-center rounded-full border border-[#E6C8B5] bg-[#FFF8F2] text-[#9A5E3D] shadow-[0_10px_18px_-14px_rgba(68,34,18,0.56)] transition-colors hover:bg-[#FFF1E7] hover:text-[#6D3B24]"
         aria-label={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
         title={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
       >
@@ -97,8 +111,8 @@ export default function Sidebar() {
       </button>
 
       {/* Navigation */}
-      <nav className="flex-1 overflow-y-auto p-3">
-        <div className="space-y-1">
+      <nav className="flex-1 overflow-y-auto px-3 pb-3 pt-4">
+        <div className="space-y-1.5">
           {/* Dashboard */}
           <NavLink
             to="/"
@@ -137,7 +151,11 @@ export default function Sidebar() {
 
           {/* Sub-nav */}
           {isInProjects && (
-            <div className={collapsed ? 'mt-1 space-y-0.5' : 'ml-4 space-y-0.5 border-l border-white/10 pl-3'}>
+            <div
+              className={
+                collapsed ? 'mt-1.5 space-y-1' : 'ml-4 mt-1.5 space-y-1 border-l border-white/16 pl-3'
+              }
+            >
               {projectSubNav.map(({ suffix, icon: Icon, label }) => {
                 if (!hasProject) {
                   return (
@@ -145,8 +163,8 @@ export default function Sidebar() {
                       key={suffix || 'overview'}
                       className={
                         collapsed
-                          ? 'flex justify-center rounded-lg p-2 text-white/20'
-                          : 'flex cursor-not-allowed items-center gap-2.5 rounded-lg px-3 py-2 text-[13px] font-medium text-white/20'
+                          ? 'flex justify-center rounded-lg p-2 text-[#D7B8A5]/75'
+                          : 'flex cursor-not-allowed items-center gap-2.5 rounded-lg px-3 py-2 text-[13px] font-medium text-[#D7B8A5]/75'
                       }
                       title="Select a project first"
                     >
@@ -177,17 +195,17 @@ export default function Sidebar() {
         </div>
 
         {/* Tools */}
-        <div className={`mt-6 border-t border-white/10 pt-4 ${collapsed ? 'flex justify-center' : ''}`}>
+        <div className={`mt-6 border-t border-white/18 pt-4 ${collapsed ? 'flex justify-center' : ''}`}>
           {collapsed ? (
-            <div className="flex items-center justify-center rounded-lg p-2 text-white/50" title="AI Chat">
+            <div className="flex items-center justify-center rounded-lg p-2 text-[#F9EADF]" title="AI Chat">
               <Bot className="h-4 w-4 shrink-0" aria-hidden />
             </div>
           ) : (
             <>
-              <p className="mb-2 px-4 text-xs font-semibold uppercase tracking-wider text-white/40">
+              <p className="mb-2 px-4 text-xs font-semibold uppercase tracking-[0.12em] text-[#F8E4D6]/88">
                 Tools
               </p>
-              <p className="flex items-center gap-3 rounded-lg px-4 py-2 text-sm text-white/50">
+              <p className="flex items-center gap-3 rounded-lg bg-white/11 px-4 py-2 text-sm text-[#FFF5ED]">
                 <Bot className="h-4 w-4 shrink-0" aria-hidden />
                 AI Chat (bottom-right)
               </p>
@@ -197,15 +215,15 @@ export default function Sidebar() {
       </nav>
 
       {/* User info */}
-      <div className="border-t border-white/10 p-3">
+      <div className="border-t border-white/18 px-3 py-4">
         <div
-          className={`flex items-center gap-3 rounded-lg px-3 py-2 ${
+          className={`flex items-center gap-3 px-2 py-1 ${
             collapsed ? 'justify-center px-0' : ''
           }`}
         >
           <Avatar name={user?.displayName ?? 'User'} size="sm" />
           {!collapsed && (
-            <span className="truncate text-sm font-medium text-white/95">
+            <span className="truncate text-sm font-semibold text-[#FFFDF9]">
               {user?.displayName ?? user?.username ?? 'User'}
             </span>
           )}

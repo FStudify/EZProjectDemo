@@ -35,29 +35,32 @@ export default function TaskCard({ task, projectMembers = [], onClick, isDraggin
           onClick?.();
         }
       }}
-      className={`cursor-grab active:cursor-grabbing bg-white rounded-lg shadow-sm border border-slate-100 p-4 hover:shadow-md hover:border-slate-200 transition-all duration-200 select-none ${
+      className={`cursor-grab active:cursor-grabbing rounded-lg border border-[#E8D8CC] bg-[#FFFDFB] p-3 shadow-sm transition-all duration-200 select-none hover:border-[#DDC9B9] hover:shadow-md ${
         isDragging ? 'opacity-50 scale-95' : ''
       }`}
     >
-      <h4 className="font-medium text-slate-900 mb-2 line-clamp-2">
+      <h4 className="mb-1.5 line-clamp-2 text-[15px] font-semibold leading-snug text-slate-900">
         {task.title}
       </h4>
-      <div className="flex items-center gap-2 mb-3">
+
+      <div className="mb-2 flex items-center gap-2">
         <Badge variant={priorityVariant[task.priority]}>{task.priority}</Badge>
       </div>
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-2 min-w-0">
+
+      <div className="flex items-center justify-between gap-2">
+        <div className="flex min-w-0 items-center gap-2">
           <ProjectMemberAvatar
             member={task.assignee}
             projectMembers={projectMembers}
             size="sm"
           />
-          <span className="text-sm text-slate-600 truncate">
+          <span className="truncate text-[13px] text-[#635648]">
             {task.assignee.name}
           </span>
         </div>
-        <div className="flex items-center gap-1.5 text-xs text-slate-500 shrink-0">
-          <Calendar className="w-3.5 h-3.5" strokeWidth={2} />
+
+        <div className="flex shrink-0 items-center gap-1 text-[11px] text-[#867668]">
+          <Calendar className="h-3.5 w-3.5" strokeWidth={2} />
           <span>
             {new Date(task.deadline).toLocaleDateString(undefined, {
               month: 'short',
