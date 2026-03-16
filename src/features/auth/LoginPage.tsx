@@ -1,12 +1,14 @@
 import { useState } from 'react';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { GraduationCap } from 'lucide-react';
-import { Button } from '@/components/ui';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from './AuthContext';
+import BrandingPanel from './components/BrandingPanel';
+import LoginForm from './components/LoginForm';
 
 export default function LoginPage() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [rememberMe, setRememberMe] = useState(true);
+  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const { login } = useAuth();
@@ -23,7 +25,7 @@ export default function LoginPage() {
       if (ok) {
         navigate(from, { replace: true });
       } else {
-        setError('Tài khoản hoặc mật khẩu không đúng.');
+        setError('Invalid username or password.');
       }
     } finally {
       setLoading(false);
@@ -31,69 +33,44 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-surface-alt px-4">
-      <div className="w-full max-w-md">
-        <div className="rounded-2xl border border-border bg-white p-8 shadow-lg">
-          <div className="mb-8 flex items-center justify-center gap-3">
-            <GraduationCap className="h-10 w-10 text-primary" aria-hidden />
-            <span className="text-2xl font-bold text-text-primary">EZProject</span>
-          </div>
+    <div className="ez-login-shell relative h-[100dvh] overflow-y-auto bg-[#FFF8F3] lg:overflow-hidden">
+      <video
+        autoPlay
+        muted
+        loop
+        playsInline
+        className="absolute inset-0 h-full w-full object-cover object-center"
+      >
+        <source src="/login.mp4" type="video/mp4" />
+      </video>
 
-          <h1 className="mb-6 text-center text-xl font-semibold text-text-primary">Đăng nhập</h1>
+      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(112deg,rgba(27,18,13,0.56)_0%,rgba(81,50,30,0.42)_28%,rgba(243,111,33,0.24)_52%,rgba(35,27,22,0.66)_100%)]" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_16%_34%,rgba(21,14,10,0.46),transparent_44%),radial-gradient(circle_at_14%_16%,rgba(255,248,243,0.3),transparent_30%),radial-gradient(circle_at_80%_22%,rgba(246,165,107,0.22),transparent_34%),radial-gradient(circle_at_72%_16%,rgba(109,190,69,0.16),transparent_22%),radial-gradient(circle_at_20%_84%,rgba(50,39,33,0.26),transparent_45%)]" />
 
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div>
-              <label htmlFor="username" className="mb-1.5 block text-sm font-medium text-text-secondary">
-                Tài khoản
-              </label>
-              <input
-                id="username"
-                type="text"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                className="w-full rounded-lg border border-border bg-white px-4 py-2.5 text-text-primary placeholder:text-text-secondary focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
-                placeholder="user123"
-                required
-                autoComplete="username"
-              />
-            </div>
-
-            <div>
-              <label htmlFor="password" className="mb-1.5 block text-sm font-medium text-text-secondary">
-                Mật khẩu
-              </label>
-              <input
-                id="password"
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="w-full rounded-lg border border-border bg-white px-4 py-2.5 text-text-primary placeholder:text-text-secondary focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
-                placeholder="••••••••"
-                required
-                autoComplete="current-password"
-              />
-            </div>
-
-            {error && (
-              <div className="rounded-lg bg-red-50 px-4 py-2 text-sm text-red-600">{error}</div>
-            )}
-
-            <Button type="submit" className="w-full" disabled={loading}>
-              {loading ? 'Đang đăng nhập...' : 'Đăng nhập'}
-            </Button>
-          </form>
-
-          <p className="mt-6 text-center text-sm text-text-secondary">
-            Chưa có tài khoản?{' '}
-            <Link to="/register" className="font-medium text-primary hover:underline">
-              Đăng ký
-            </Link>
-          </p>
+      <div className="relative z-20 mx-auto grid h-full w-full max-w-[1320px] grid-cols-1 items-center gap-4 px-4 py-4 sm:gap-5 sm:px-6 sm:py-5 lg:grid-cols-[1.1fr_0.9fr] lg:gap-8 lg:px-8 lg:py-6 xl:py-7">
+        <div className="lg:hidden">
+          <BrandingPanel compact />
         </div>
 
-        <p className="mt-4 text-center text-xs text-text-secondary">
-          Demo: user123 / 123
-        </p>
+        <BrandingPanel />
+
+        <div className="flex items-center justify-center lg:justify-end">
+          <div className="w-full max-w-[500px]">
+            <LoginForm
+              username={username}
+              password={password}
+              rememberMe={rememberMe}
+              showPassword={showPassword}
+              loading={loading}
+              error={error}
+              onSubmit={handleSubmit}
+              onUsernameChange={setUsername}
+              onPasswordChange={setPassword}
+              onToggleShowPassword={() => setShowPassword((prev) => !prev)}
+              onRememberMeChange={setRememberMe}
+            />
+          </div>
+        </div>
       </div>
     </div>
   );
