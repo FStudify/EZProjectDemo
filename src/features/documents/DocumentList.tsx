@@ -114,7 +114,7 @@ export default function DocumentList() {
               onChange={handleUpload}
             />
             <Button
-              variant="primary"
+              variant="accent"
               size="md"
               onClick={() => fileInputRef.current?.click()}
             >

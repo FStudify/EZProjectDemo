@@ -36,57 +36,75 @@ export default function MemberPerformanceCard({
   const { member, tasksCompleted, tasksInProgress, documentsUploaded, commentsCount, contributions, score } =
     performance;
   const scoreVariant = getScoreVariant(score);
+  const scoreOverTen = (score / 10).toFixed(1);
 
   return (
-    <article className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm transition-shadow hover:shadow-md">
+    <article className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition-shadow hover:shadow-md">
       {/* Top section: Avatar + name + email + score */}
-      <div className="mb-6 flex items-start gap-4">
+      <div className="mb-6 flex items-start gap-4 border-b border-slate-200 pb-5">
         <ProjectMemberAvatar member={member} projectMembers={projectMembers} size="lg" />
         <div className="min-w-0 flex-1">
-          <h3 className="truncate font-semibold text-slate-900">{member.name}</h3>
-          <p className="truncate text-sm text-slate-500">{member.email}</p>
-          <div className="mt-2">
+          <div className="flex items-start justify-between gap-3">
+            <div className="min-w-0">
+              <h3 className="truncate text-lg font-semibold leading-tight text-slate-900">{member.name}</h3>
+              <p className="truncate text-sm text-slate-600">{member.email}</p>
+            </div>
+            <div className="rounded-xl bg-slate-50 px-3 py-2 text-right">
+              <p className="text-xs font-medium uppercase tracking-wide text-slate-500">Performance</p>
+              <p className="text-lg font-bold leading-tight text-slate-900">{score}</p>
+            </div>
+          </div>
+          <div className="mt-3 flex items-center gap-2">
             <Badge variant={scoreVariant}>Score: {score}</Badge>
+            <span className="text-xs font-medium text-slate-500">({scoreOverTen}/10)</span>
           </div>
         </div>
       </div>
 
       {/* Stats grid 2x2 */}
-      <div className="mb-6 grid grid-cols-2 gap-4">
-        <div className="flex items-center gap-3">
-          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-emerald-100 text-emerald-600">
+      <div className="mb-6 grid grid-cols-2 gap-3">
+        <div className="rounded-xl border border-emerald-100 bg-emerald-50 p-3">
+          <div className="flex items-center gap-3">
+            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-emerald-100 text-emerald-700">
             <CheckCircle className="h-5 w-5" />
-          </div>
-          <div>
-            <p className="text-xs text-slate-500">Tasks Completed</p>
-            <p className="font-semibold text-slate-900">{tasksCompleted}</p>
+            </div>
+            <div>
+              <p className="text-xs font-medium uppercase tracking-wide text-emerald-700">Tasks Completed</p>
+              <p className="text-2xl font-bold leading-tight text-slate-900">{tasksCompleted}</p>
+            </div>
           </div>
         </div>
-        <div className="flex items-center gap-3">
-          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-amber-100 text-amber-600">
+        <div className="rounded-xl border border-amber-100 bg-amber-50 p-3">
+          <div className="flex items-center gap-3">
+            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-amber-100 text-amber-700">
             <Clock className="h-5 w-5" />
-          </div>
-          <div>
-            <p className="text-xs text-slate-500">In Progress</p>
-            <p className="font-semibold text-slate-900">{tasksInProgress}</p>
+            </div>
+            <div>
+              <p className="text-xs font-medium uppercase tracking-wide text-amber-700">In Progress</p>
+              <p className="text-2xl font-bold leading-tight text-slate-900">{tasksInProgress}</p>
+            </div>
           </div>
         </div>
-        <div className="flex items-center gap-3">
-          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-blue-100 text-blue-600">
+        <div className="rounded-xl border border-blue-100 bg-blue-50 p-3">
+          <div className="flex items-center gap-3">
+            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-blue-100 text-blue-700">
             <FileUp className="h-5 w-5" />
-          </div>
-          <div>
-            <p className="text-xs text-slate-500">Docs Uploaded</p>
-            <p className="font-semibold text-slate-900">{documentsUploaded}</p>
+            </div>
+            <div>
+              <p className="text-xs font-medium uppercase tracking-wide text-blue-700">Docs Uploaded</p>
+              <p className="text-2xl font-bold leading-tight text-slate-900">{documentsUploaded}</p>
+            </div>
           </div>
         </div>
-        <div className="flex items-center gap-3">
-          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary-50 text-primary">
+        <div className="rounded-xl border border-primary-100 bg-primary-50 p-3">
+          <div className="flex items-center gap-3">
+            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-white text-primary shadow-sm">
             <MessageSquare className="h-5 w-5" />
-          </div>
-          <div>
-            <p className="text-xs text-slate-500">Comments</p>
-            <p className="font-semibold text-slate-900">{commentsCount}</p>
+            </div>
+            <div>
+              <p className="text-xs font-medium uppercase tracking-wide text-primary-dark">Comments</p>
+              <p className="text-2xl font-bold leading-tight text-slate-900">{commentsCount}</p>
+            </div>
           </div>
         </div>
       </div>
@@ -95,11 +113,11 @@ export default function MemberPerformanceCard({
       <ContributionGraph contributions={contributions} />
 
       {/* Evaluation / Feedback */}
-      <div className="mt-6 border-t border-slate-200 pt-4">
-        <h4 className="mb-3 text-sm font-semibold text-slate-700">Evaluation & Feedback</h4>
+      <div className="mt-6 rounded-xl border border-slate-200 bg-slate-50 px-4 py-4">
+        <h4 className="mb-3 text-sm font-semibold text-slate-800">Evaluation & Feedback</h4>
         <div className="space-y-3">
           <div>
-            <p className="mb-1.5 text-xs text-slate-500">Score (0–10)</p>
+            <p className="mb-1.5 text-xs font-medium text-slate-600">Score (0-10)</p>
             <div className="flex items-center gap-2">
               <input
                 type="number"
@@ -113,19 +131,19 @@ export default function MemberPerformanceCard({
                   setIsEditing(true);
                 }}
                 placeholder="0.00"
-                className="w-24 rounded-lg border border-slate-300 px-3 py-2 text-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
+                className="w-24 rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm font-medium focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
               />
               <span className="text-sm text-slate-500">/ 10</span>
             </div>
           </div>
           <div>
-            <p className="mb-1.5 text-xs text-slate-500">Feedback</p>
+            <p className="mb-1.5 text-xs font-medium text-slate-600">Feedback</p>
             <textarea
               value={feedback}
               onChange={(e) => { setFeedback(e.target.value); setIsEditing(true); }}
               placeholder="Feedback on contributions, strengths, areas to improve..."
               rows={3}
-              className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm placeholder:text-slate-400 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
+              className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm placeholder:text-slate-400 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
             />
           </div>
           {onSaveEvaluation && isEditing && (

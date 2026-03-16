@@ -101,7 +101,7 @@ export default function MeetingList() {
             Schedule and manage project meetings
           </p>
         </div>
-        <Button variant="primary" size="sm" onClick={() => setIsAddOpen(true)}>
+        <Button variant="accent" size="sm" onClick={() => setIsAddOpen(true)}>
           <Plus className="mr-1.5 h-4 w-4" />
           New Meeting
         </Button>
@@ -115,7 +115,7 @@ export default function MeetingList() {
             Create a meeting to schedule team discussions
           </p>
           <Button
-            variant="primary"
+            variant="accent"
             size="sm"
             className="mt-4"
             onClick={() => setIsAddOpen(true)}

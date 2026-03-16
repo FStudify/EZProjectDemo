@@ -59,7 +59,7 @@ export default function MemberList() {
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <h2 className="text-lg font-semibold text-slate-900">Member Management</h2>
-        <Button variant="primary" size="md" className="inline-flex items-center gap-2">
+        <Button variant="accent" size="md" className="inline-flex items-center gap-2">
           <UserPlus className="w-5 h-5" strokeWidth={2} />
           Invite
         </Button>
