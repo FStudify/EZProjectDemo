@@ -94,12 +94,12 @@ export default function RegisterPage() {
     setError('');
 
     if (password !== confirmPassword) {
-      setError('Password confirmation does not match.');
+      setError('Xác nhận mật khẩu không khớp.');
       return;
     }
 
     if (password.length < 3) {
-      setError('Password must be at least 3 characters.');
+      setError('Mật khẩu phải có ít nhất 3 ký tự.');
       return;
     }
 
@@ -110,10 +110,10 @@ export default function RegisterPage() {
         setUser(user);
         navigate('/', { replace: true });
       } else {
-        setError('Sign up failed. Please try again.');
+        setError('Đăng ký thất bại. Vui lòng thử lại.');
       }
     } catch {
-      setError('An unexpected error occurred.');
+      setError('Đã xảy ra lỗi không mong muốn.');
     } finally {
       setLoading(false);
     }
@@ -145,9 +145,9 @@ export default function RegisterPage() {
           <div className="w-full max-w-[620px]">
             <div className="animate-ez-fade-up rounded-[24px] border border-[#E8C7AE]/80 bg-[rgba(255,249,244,0.95)] p-5 shadow-[0_28px_60px_-40px_rgba(39,24,16,0.42)] backdrop-blur-xl sm:p-6 lg:p-6">
               <div className="mb-4">
-                <h1 className="text-[31px] font-extrabold leading-tight tracking-tight text-[#1F1F1F]">Sign up</h1>
+                <h1 className="text-[31px] font-extrabold leading-tight tracking-tight text-[#1F1F1F]">Đăng ký</h1>
                 <p className="mt-1.5 text-sm leading-relaxed text-[#6B7280]">
-                  Create your account to start collaborating smarter.
+                  Tạo tài khoản của bạn để bắt đầu cộng tác thông minh hơn.
                 </p>
               </div>
 
@@ -155,7 +155,7 @@ export default function RegisterPage() {
                 <div className="grid grid-cols-1 gap-3 md:grid-cols-2 md:gap-3">
                   <RegisterInput
                     id="username"
-                    label="Username"
+                    label="Tên đăng nhập"
                     type="text"
                     value={username}
                     onChange={setUsername}
@@ -167,7 +167,7 @@ export default function RegisterPage() {
 
                   <RegisterInput
                     id="displayName"
-                    label="Full name"
+                    label="Họ và tên"
                     type="text"
                     value={displayName}
                     onChange={setDisplayName}
@@ -191,7 +191,7 @@ export default function RegisterPage() {
 
                   <RegisterInput
                     id="password"
-                    label="Password"
+                    label="Mật khẩu"
                     type={showPassword ? 'text' : 'password'}
                     value={password}
                     onChange={setPassword}
@@ -202,7 +202,7 @@ export default function RegisterPage() {
                     icon={LockKeyhole}
                     toggleButton={{
                       onClick: () => setShowPassword((prev) => !prev),
-                      label: showPassword ? 'Hide password' : 'Show password',
+                      label: showPassword ? 'Ẩn mật khẩu' : 'Hiển thị mật khẩu',
                       icon: showPassword ? (
                         <EyeOff className="h-[17px] w-[17px]" />
                       ) : (
@@ -213,7 +213,7 @@ export default function RegisterPage() {
 
                   <RegisterInput
                     id="confirmPassword"
-                    label="Confirm password"
+                    label="Xác nhận mật khẩu"
                     type={showConfirmPassword ? 'text' : 'password'}
                     value={confirmPassword}
                     onChange={setConfirmPassword}
@@ -223,7 +223,7 @@ export default function RegisterPage() {
                     icon={LockKeyhole}
                     toggleButton={{
                       onClick: () => setShowConfirmPassword((prev) => !prev),
-                      label: showConfirmPassword ? 'Hide confirmation password' : 'Show confirmation password',
+                      label: showConfirmPassword ? 'Ẩn mật khẩu xác nhận' : 'Hiển thị mật khẩu xác nhận',
                       icon: showConfirmPassword ? (
                         <EyeOff className="h-[17px] w-[17px]" />
                       ) : (
@@ -245,17 +245,17 @@ export default function RegisterPage() {
                   className="group relative inline-flex h-[46px] w-full items-center justify-center overflow-hidden rounded-xl bg-[#D97853] text-[15px] font-semibold text-white shadow-[0_14px_26px_-16px_rgba(217,120,83,0.78)] transition duration-200 hover:bg-[#C96B48] hover:shadow-[0_18px_30px_-18px_rgba(201,107,72,0.8)] focus:outline-none focus:ring-4 focus:ring-[#D97853]/28 disabled:cursor-not-allowed disabled:opacity-65"
                 >
                   <span className="absolute inset-0 bg-black/0 transition group-hover:bg-black/5" />
-                  <span className="relative">{loading ? 'Signing up...' : 'Sign up'}</span>
+                  <span className="relative">{loading ? 'Đang đăng ký...' : 'Đăng ký'}</span>
                 </button>
               </form>
 
               <p className="mt-4 text-center text-sm text-[#6B7280]">
-                Already have an account?{' '}
+                Đã có tài khoản?{' '}
                 <Link
                   to="/login"
                   className="font-semibold text-[#1F1F1F] transition hover:text-[#D97853] hover:underline"
                 >
-                  Sign in
+                  Đăng nhập
                 </Link>
               </p>
             </div>

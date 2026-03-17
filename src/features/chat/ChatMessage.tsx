@@ -11,10 +11,10 @@ function formatRelativeTime(timestamp: string): string {
   const diffHour = Math.floor(diffMin / 60);
   const diffDay = Math.floor(diffHour / 24);
 
-  if (diffSec < 60) return 'Just now';
-  if (diffMin < 60) return `${diffMin}m ago`;
-  if (diffHour < 24) return `${diffHour}h ago`;
-  if (diffDay < 7) return `${diffDay}d ago`;
+  if (diffSec < 60) return 'Vừa xong';
+  if (diffMin < 60) return `${diffMin} phút trước`;
+  if (diffHour < 24) return `${diffHour} giờ trước`;
+  if (diffDay < 7) return `${diffDay} ngày trước`;
   return date.toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' });
 }
 
@@ -27,7 +27,7 @@ interface ChatMessageProps {
 export default function ChatMessage({ message, isOwn, projectMembers = [] }: ChatMessageProps) {
   const sender = message.sender;
   const isAI = sender === 'ai';
-  const senderName = isAI ? 'AI Assistant' : sender.name;
+  const senderName = isAI ? 'Chatbot AI' : sender.name;
 
   return (
     <div className={`flex gap-2 ${isOwn ? 'flex-row-reverse' : ''}`}>

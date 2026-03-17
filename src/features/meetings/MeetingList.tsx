@@ -19,10 +19,10 @@ import { Button, Modal, ProjectMemberAvatar } from '@/components/ui';
 const CURRENT_USER_ID = mockMembers[0].id;
 
 const STATUS_LABELS: Record<MeetingStatus, string> = {
-  scheduled: 'Scheduled',
-  in_progress: 'In Progress',
-  completed: 'Completed',
-  cancelled: 'Cancelled',
+  scheduled: 'Đã lên lịch',
+  in_progress: 'Đang diễn ra',
+  completed: 'Đã hoàn thành',
+  cancelled: 'Đã hủy',
 };
 
 const STATUS_VARIANTS: Record<MeetingStatus, string> = {

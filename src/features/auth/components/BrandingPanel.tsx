@@ -17,20 +17,20 @@ interface FloatingBadge {
 const floatingBadges: FloatingBadge[] = [
   {
     icon: CheckCircle2,
-    text: '12 Tasks Completed',
+    text: '12 Nhiệm vụ đã hoàn thành',
     className: 'left-4 top-20 xl:left-8',
     delay: 0,
   },
   {
     icon: FolderKanban,
-    text: '3 Active Projects',
+    text: '3 Dự án đang hoạt động',
     className: 'right-4 top-20 xl:right-10',
     delay: 1.2,
     greenAccent: true,
   },
   {
     icon: GraduationCap,
-    text: 'Team Progress 78%',
+    text: 'Tiến độ nhóm 78%',
     className: 'left-7 bottom-24 xl:left-12',
     delay: 1.9,
     greenAccent: true,
@@ -38,7 +38,7 @@ const floatingBadges: FloatingBadge[] = [
   },
   {
     icon: CalendarClock,
-    text: 'Deadline Today',
+    text: 'Hạn hạn hôm nay',
     className: 'right-8 bottom-11 xl:right-12',
     delay: 0.7,
   },
@@ -54,15 +54,15 @@ export default function BrandingPanel({ compact = false }: BrandingPanelProps) {
         </div>
 
         <h2 className="mt-3.5 max-w-[520px] text-[26px] font-extrabold leading-[1.12] tracking-[-0.01em] text-[#FFFDF8] drop-shadow-[0_8px_18px_rgba(22,14,10,0.5)] sm:text-[31px]">
-          Manage group projects with clarity
+          Quản lý dự án nhóm một cách rõ ràng
         </h2>
 
         <p className="mt-2.5 max-w-[500px] text-[16px] leading-relaxed text-[#FCEBDD]">
-          Tasks, discussions, and progress - all in one collaborative workspace.
+          Nhiệm vụ, thảo luận và tiến độ - tất cả trong một không gian làm việc cộng tác.
         </p>
 
         <p className="mt-1.5 max-w-[500px] text-[13px] leading-relaxed text-[#FFE3D0]">
-          Built for students who want clearer teamwork across every course and deadline.
+          Xây dựng cho sinh viên muốn làm việc nhóm rõ ràng hơn trong mọi khóa học và hạn chót.
         </p>
       </section>
     );
@@ -79,15 +79,15 @@ export default function BrandingPanel({ compact = false }: BrandingPanelProps) {
         </div>
 
         <h2 className="whitespace-nowrap text-[26px] font-extrabold leading-[1.1] tracking-[-0.012em] text-[#FFFDF8] drop-shadow-[0_10px_20px_rgba(24,15,11,0.52)] xl:text-[29px]">
-          Manage group projects with clarity
+          Quản lý dự án nhóm một cách rõ ràng
         </h2>
 
         <p className="whitespace-nowrap text-[16px] leading-relaxed text-[#FCEBDD] drop-shadow-[0_5px_14px_rgba(24,16,11,0.3)]">
-          Tasks, discussions, and progress - all in one collaborative workspace.
+          Nhiệm vụ, thảo luận và tiến độ - tất cả trong một không gian làm việc cộng tác.
         </p>
 
         <p className="max-w-[500px] text-[15px] leading-relaxed text-[#FFE3D0]">
-          Built for students who want clearer teamwork across every course and deadline.
+          Xây dựng cho sinh viên muốn làm việc nhóm rõ ràng hơn trong mọi khóa học và hạn chót.
         </p>
       </div>
 

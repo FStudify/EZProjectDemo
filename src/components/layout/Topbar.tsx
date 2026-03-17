@@ -201,7 +201,7 @@ export default function Topbar({ title }: TopbarProps) {
                 className="h-11 w-full rounded-xl border border-[#E3D4C9] bg-white pl-9 pr-3 text-sm text-[#2C2825] placeholder:text-[#B7A79C] shadow-[inset_0_1px_1px_rgba(255,255,255,0.85)] focus:border-[#D97853] focus:outline-none focus:ring-4 focus:ring-[#D97853]/15"
               />
             </div>
-            <p className="mt-1.5 text-xs text-[#9A8A80]">Profile changes are saved to your current local session.</p>
+            <p className="mt-1.5 text-xs text-[#9A8A80]">Các thay đổi hồ sơ được lưu vào phiên địa phương hiện tại của bạn.</p>
           </div>
 
           <div className="flex justify-end gap-2 pt-1.5">

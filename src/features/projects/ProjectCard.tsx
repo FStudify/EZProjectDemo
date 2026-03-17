@@ -15,7 +15,7 @@ function getProgressTheme(value: number) {
       bar: 'bg-[linear-gradient(90deg,#79CD56,#6DBE45)]',
       percent: 'text-[#4E9D33]',
       statusPill: 'border-[#CDE8BF] bg-[#EFF9E8] text-[#4B9331]',
-      statusLabel: 'Healthy',
+      statusLabel: 'Tốt',
     };
   }
 
@@ -26,7 +26,7 @@ function getProgressTheme(value: number) {
       bar: 'bg-[linear-gradient(90deg,#E18B66,#D97853)]',
       percent: 'text-[#B76442]',
       statusPill: 'border-[#EFC8B4] bg-[#FDF0E8] text-[#B76442]',
-      statusLabel: 'In Progress',
+      statusLabel: 'Đang thực hiện',
     };
   }
 
@@ -36,7 +36,7 @@ function getProgressTheme(value: number) {
     bar: 'bg-[linear-gradient(90deg,#3C5D89,#274C7D)]',
     percent: 'text-[#31527F]',
     statusPill: 'border-[#C9D6E8] bg-[#EDF3FB] text-[#31527F]',
-    statusLabel: 'Needs Focus',
+    statusLabel: 'Cần tập trung',
   };
 }
 
@@ -66,7 +66,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
 
       <div className="mt-5">
         <div className="mb-2 flex items-center justify-between">
-          <span className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[#A0816E]">Progress</span>
+          <span className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[#A0816E]">Tiến độ</span>
           <span className={`text-[15px] font-semibold ${theme.percent}`}>{progress}%</span>
         </div>
 
@@ -109,7 +109,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
       <div className="mt-3">
         <span className="inline-flex items-center gap-1.5 rounded-full border border-[#ECD9CC] bg-[#FFF7F1] px-3 py-1.5 text-[13px] font-medium text-[#66594E]">
           <CheckCheck className="h-3.5 w-3.5 text-[#6DBE45]" />
-          {project.completedTasks} / {project.totalTasks} tasks
+          {project.completedTasks} / {project.totalTasks} công việc
         </span>
       </div>
     </Link>

@@ -33,14 +33,14 @@ export default function LoginForm({
   return (
     <div className="animate-ez-fade-up rounded-[24px] border border-[#E8C7AE]/80 bg-[rgba(255,249,244,0.94)] p-5 shadow-[0_28px_60px_-40px_rgba(39,24,16,0.4)] backdrop-blur-xl sm:p-6 lg:p-7">
       <div className="mb-6">
-        <h1 className="text-[34px] font-extrabold tracking-tight text-[#1F1F1F]">Sign in</h1>
-        <p className="mt-1.5 text-sm text-[#6B7280]">Welcome back. Sign in to continue.</p>
+        <h1 className="text-[34px] font-extrabold tracking-tight text-[#1F1F1F]">Đăng nhập</h1>
+        <p className="mt-1.5 text-sm text-[#6B7280]">Chào mừng trở lại. Đăng nhập để tiếp tục.</p>
       </div>
 
       <form onSubmit={onSubmit} className="space-y-4">
         <div>
           <label htmlFor="username" className="mb-1.5 block text-sm font-semibold text-[#1F1F1F]">
-            Username
+            Tên đăng nhập
           </label>
           <div className="relative">
             <UserCircle2
@@ -62,7 +62,7 @@ export default function LoginForm({
 
         <div>
           <label htmlFor="password" className="mb-1.5 block text-sm font-semibold text-[#1F1F1F]">
-            Password
+            Mật khẩu
           </label>
           <div className="relative">
             <LockKeyhole
@@ -83,7 +83,7 @@ export default function LoginForm({
               type="button"
               className="absolute right-2 top-1/2 inline-flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full text-[#A38A77] transition hover:bg-[#FCE7D6]/65 hover:text-[#D97853] focus:outline-none focus:ring-2 focus:ring-[#D97853]/28"
               onClick={onToggleShowPassword}
-              aria-label={showPassword ? 'Hide password' : 'Show password'}
+              aria-label={showPassword ? 'Ẩn mật khẩu' : 'Hiển thị mật khẩu'}
             >
               {showPassword ? <EyeOff className="h-[18px] w-[18px]" /> : <Eye className="h-[18px] w-[18px]" />}
             </button>
@@ -98,7 +98,7 @@ export default function LoginForm({
               onChange={(e) => onRememberMeChange(e.target.checked)}
               className="h-4 w-4 rounded border-[#D8C4B5] text-[#6DBE45] focus:ring-2 focus:ring-[#6DBE45]/30"
             />
-            <span>Remember me</span>
+            <span>Ghi nhớ đăng nhập</span>
           </label>
 
           <button
@@ -106,7 +106,7 @@ export default function LoginForm({
             onClick={(e) => e.preventDefault()}
             className="text-sm font-semibold text-[#1F1F1F] transition hover:text-[#D97853]"
           >
-            Forgot password?
+            Quên mật khẩu?
           </button>
         </div>
 
@@ -122,16 +122,16 @@ export default function LoginForm({
           className="group relative inline-flex h-[50px] w-full items-center justify-center overflow-hidden rounded-2xl bg-[#D97853] text-base font-semibold text-white shadow-[0_14px_26px_-16px_rgba(217,120,83,0.78)] transition duration-200 hover:bg-[#C96B48] hover:shadow-[0_18px_30px_-18px_rgba(201,107,72,0.8)] focus:outline-none focus:ring-4 focus:ring-[#D97853]/28 disabled:cursor-not-allowed disabled:opacity-65"
         >
           <span className="absolute inset-0 bg-black/0 transition group-hover:bg-black/5" />
-          <span className="relative">{loading ? 'Signing in...' : 'Sign in'}</span>
+          <span className="relative">{loading ? 'Đang đăng nhập...' : 'Đăng nhập'}</span>
         </button>
 
         <DemoAccountBox />
       </form>
 
       <p className="mt-5 text-center text-sm text-[#6B7280]">
-        Don&apos;t have an account?{' '}
+        Chưa có tài khoản?{' '}
         <Link to="/register" className="font-semibold text-[#1F1F1F] transition hover:text-[#D97853] hover:underline">
-          Sign up
+          Đăng ký
         </Link>
       </p>
     </div>

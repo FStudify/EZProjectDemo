@@ -25,7 +25,7 @@ export default function LoginPage() {
       if (ok) {
         navigate(from, { replace: true });
       } else {
-        setError('Invalid username or password.');
+        setError('Tên đăng nhập hoặc mật khẩu không hợp lệ.');
       }
     } finally {
       setLoading(false);

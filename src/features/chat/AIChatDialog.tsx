@@ -6,12 +6,12 @@ import ChatMessageBubble from './ChatMessage';
 import Button from '@/components/ui/Button';
 
 const WELCOME_MESSAGE: ChatMessage = {
-  id: 'ai-welcome',
+  id: 'Xin Chào',
   projectId: '',
   roomId: 'ai',
   sender: 'ai',
   content:
-    "Hi! I'm your AI project assistant. Ask me about tasks, deadlines, priorities, or anything about your project!",
+    "Chào! Tôi là trợ lý dự án AI của bạn. Hãy hỏi tôi về các nhiệm vụ, thời hạn, mức độ ưu tiên hoặc bất cứ điều gì liên quan đến dự án của bạn!",
   timestamp: new Date().toISOString(),
   channel: 'ai',
 };
@@ -24,7 +24,7 @@ function findAIResponse(input: string): string {
       return mockAIResponses[key];
     }
   }
-  return "I'm not sure about that. Try asking about tasks, deadlines, progress, or priorities!";
+  return "Tôi không chắc về điều đó. Hãy thử hỏi về nhiệm vụ, thời hạn, tiến độ hoặc ưu tiên!";
 }
 
 export default function AIChatDialog() {
@@ -53,8 +53,8 @@ export default function AIChatDialog() {
   const handlePointerDown = useCallback(
     (e: React.PointerEvent) => {
       const t = e.target as HTMLElement;
-      if (t.closest('button[aria-label="Close"]')) return;
-      const isButton = !!t.closest('button[aria-label*="AI chat"]');
+      if (t.closest('button[aria-label="Đóng"]')) return;
+      const isButton = !!t.closest('button[aria-label*="Chatbot AI"]');
       const isHeader = !!t.closest('[data-drag-header]');
       if (!isButton && !isHeader) return;
       e.preventDefault();
@@ -151,7 +151,7 @@ export default function AIChatDialog() {
         className={`group relative flex h-14 w-14 cursor-grab items-center justify-center rounded-2xl bg-[linear-gradient(145deg,#163B72,#274C7D)] text-white shadow-[0_18px_34px_-14px_rgba(22,59,114,0.8)] transition-all duration-200 hover:-translate-y-[1px] hover:shadow-[0_22px_38px_-16px_rgba(22,59,114,0.85)] active:cursor-grabbing touch-none ${
           isOpen ? 'ring-4 ring-[#B8C9E2]' : ''
         }`}
-        aria-label={isOpen ? 'Close AI chat' : 'Open AI chat'}
+        aria-label={isOpen ? 'Đóng Chatbot AI' : 'Mở Chatbot AI'}
       >
         <Bot className="h-7 w-7 pointer-events-none" aria-hidden />
         <span className="animate-ez-green-pulse pointer-events-none absolute -right-0.5 -top-0.5 inline-flex h-3.5 w-3.5 rounded-full border-2 border-white bg-[#6DBE45] shadow-[0_0_0_4px_rgba(109,190,69,0.22)]" />
@@ -172,13 +172,13 @@ export default function AIChatDialog() {
           >
             <div className="flex items-center gap-2">
               <Sparkles className="h-5 w-5 text-[#DCE8F7]" aria-hidden />
-              <h3 className="text-sm font-semibold text-white">AI Assistant</h3>
+              <h3 className="text-sm font-semibold text-white">Chatbot AI</h3>
             </div>
             <button
               type="button"
               onClick={() => setIsOpen(false)}
               className="rounded-lg p-1.5 text-white/80 transition-colors hover:bg-white/10 hover:text-white"
-              aria-label="Close"
+              aria-label="Đóng"
             >
               <X className="h-5 w-5" aria-hidden />
             </button>
@@ -203,7 +203,7 @@ export default function AIChatDialog() {
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && !e.shiftKey && handleSend()}
-                placeholder="Ask me anything..."
+                placeholder="Hỏi tôi bất cứ điều gì..."
                 className="flex-1 rounded-xl border border-[#D6DFEC] px-4 py-2.5 text-sm placeholder:text-slate-400 focus:border-[#274C7D] focus:outline-none focus:ring-2 focus:ring-[#274C7D]/20"
               />
               <Button
@@ -211,7 +211,7 @@ export default function AIChatDialog() {
                 size="md"
                 onClick={handleSend}
                 className="bg-[#163B72] px-4 hover:bg-[#0F2D57]"
-                aria-label="Send"
+                aria-label="Gửi"
               >
                 <Send className="h-4 w-4" aria-hidden />
               </Button>

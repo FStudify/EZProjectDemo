@@ -4,8 +4,8 @@ import { mockMembers } from './members';
 export const mockProjects: Project[] = [
   {
     id: 'proj-1',
-    name: 'E-commerce Website',
-    description: 'Build a full-stack e-commerce platform with product catalog, cart, and checkout.',
+    name: 'Trang web thương mại điện tử',
+    description: 'Xây dựng nền tảng thương mại điện tử full-stack với danh mục sản phẩm, giỏ hàng và thanh toán.',
     progress: 60,
     members: [
       { member: mockMembers[0], isOwner: true, role: 'leader' },
@@ -19,8 +19,8 @@ export const mockProjects: Project[] = [
   },
   {
     id: 'proj-2',
-    name: 'Mobile App Design',
-    description: 'Design UI/UX for a fitness tracking mobile application.',
+    name: 'Thiết kế ứng dụng di động',
+    description: 'Thiết kế UI/UX cho ứng dụng di động theo dõi sức khỏe.',
     progress: 35,
     members: [
       { member: mockMembers[0], isOwner: true, role: 'leader' },
@@ -34,8 +34,8 @@ export const mockProjects: Project[] = [
   },
   {
     id: 'proj-3',
-    name: 'Research Paper',
-    description: 'Write and publish a research paper on machine learning in healthcare.',
+    name: 'Bài báo nghiên cứu',
+    description: 'Viết và xuất bản bài báo nghiên cứu về học máy trong y tế.',
     progress: 80,
     members: [
       { member: mockMembers[1], isOwner: true, role: 'leader' },

@@ -100,8 +100,8 @@ export default function Sidebar() {
         type="button"
         onClick={toggle}
         className="absolute -right-3 top-[72px] z-50 flex h-6 w-6 -translate-y-1/2 items-center justify-center rounded-full border border-[#E6C8B5] bg-[#FFF8F2] text-[#9A5E3D] shadow-[0_10px_18px_-14px_rgba(68,34,18,0.56)] transition-colors hover:bg-[#FFF1E7] hover:text-[#6D3B24]"
-        aria-label={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
-        title={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
+        aria-label={collapsed ? 'Mở rộng thanh bên' : 'Thu gọn thanh bên'}
+        title={collapsed ? 'Mở rộng thanh bên' : 'Thu gọn thanh bên'}
       >
         {collapsed ? (
           <ChevronRight className="h-3.5 w-3.5" />

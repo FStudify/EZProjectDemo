@@ -6,8 +6,8 @@ export default function DemoAccountBox() {
       <div className="flex items-start gap-2">
         <CircleAlert className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[#D97853]" aria-hidden />
         <div className="text-[13px] leading-relaxed">
-          <p className="font-semibold text-[#1F1F1F]">Demo account</p>
-          <p className="text-[#6F5C4D]">Use user123 / 123 to explore the platform</p>
+          <p className="font-semibold text-[#1F1F1F]">Tài khoản demo</p>
+          <p className="text-[#6F5C4D]">Sử dụng user123 / 123 để khám phá nền tảng</p>
         </div>
       </div>
     </div>

@@ -199,7 +199,7 @@ export default function ChatPage() {
         <div className="flex items-center justify-between border-b border-slate-200 px-4 py-3">
           <div className="flex items-center gap-2">
             <MessageCircle className="h-5 w-5 text-indigo-600" />
-            <h2 className="text-sm font-bold text-slate-900">Chat</h2>
+            <h2 className="text-sm font-bold text-slate-900">Trò chuyện</h2>
           </div>
           <button
             type="button"

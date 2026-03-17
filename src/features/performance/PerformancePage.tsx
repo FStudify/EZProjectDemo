@@ -95,10 +95,10 @@ export default function PerformancePage() {
       <header>
         <div className="flex items-center gap-2">
           <TrendingUp className="h-7 w-7 text-primary" aria-hidden />
-          <h1 className="text-2xl font-bold text-slate-900">Performance</h1>
+          <h1 className="text-2xl font-bold text-slate-900">Hiệu suất</h1>
         </div>
         <p className="mt-1 text-slate-600">
-          Project progress overview, member evaluation and feedback.
+          Tổng quan tiến độ dự án, đánh giá thành viên và phản hồi.
         </p>
       </header>
 

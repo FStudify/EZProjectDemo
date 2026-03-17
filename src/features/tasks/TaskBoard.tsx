@@ -14,10 +14,10 @@ import AddTaskModal from './AddTaskModal';
 type ViewMode = 'kanban' | 'timeline' | 'reminders' | 'dependencies';
 
 const COLUMNS: { status: TaskStatus; title: string }[] = [
-  { status: 'TODO', title: 'To Do' },
-  { status: 'IN_PROGRESS', title: 'In Progress' },
-  { status: 'DONE', title: 'Done' },
-  { status: 'CLOSED', title: 'Close' },
+  { status: 'TODO', title: 'Cần làm' },
+  { status: 'IN_PROGRESS', title: 'Đang thực hiện' },
+  { status: 'DONE', title: 'Hoàn thành' },
+  { status: 'CLOSED', title: 'Đóng' },
 ];
 
 interface Filters {
@@ -185,7 +185,7 @@ export default function TaskBoard() {
                   viewMode === 'kanban' ? 'bg-[#FFF1E8] text-[#B86442]' : 'text-slate-600 hover:bg-[#FBF3ED]'
                 }`}
               >
-                <LayoutGrid className="h-4 w-4" /> Kanban
+                <LayoutGrid className="h-4 w-4" /> Bảng kanban
               </button>
               <button
                 type="button"
@@ -194,7 +194,7 @@ export default function TaskBoard() {
                   viewMode === 'timeline' ? 'bg-[#FFF1E8] text-[#B86442]' : 'text-slate-600 hover:bg-[#FBF3ED]'
                 }`}
               >
-                <GanttChart className="h-4 w-4" /> Timeline
+                <GanttChart className="h-4 w-4" /> Dòng thời gian
               </button>
               <button
                 type="button"
@@ -203,7 +203,7 @@ export default function TaskBoard() {
                   viewMode === 'dependencies' ? 'bg-[#FFF1E8] text-[#B86442]' : 'text-slate-600 hover:bg-[#FBF3ED]'
                 }`}
               >
-                <GitBranch className="h-4 w-4" /> Dependencies
+                <GitBranch className="h-4 w-4" /> Phụ thuộc
               </button>
               <button
                 type="button"
@@ -212,7 +212,7 @@ export default function TaskBoard() {
                   viewMode === 'reminders' ? 'bg-[#FFF1E8] text-[#B86442]' : 'text-slate-600 hover:bg-[#FBF3ED]'
                 }`}
               >
-                <AlertTriangle className="h-4 w-4" /> Reminders
+                <AlertTriangle className="h-4 w-4" /> Nhắc nhở
               </button>
             </div>
           </div>
@@ -230,7 +230,7 @@ export default function TaskBoard() {
                 }`}
               >
                 <Filter className="h-4 w-4" />
-                Filters
+                Bộ lọc
                 {hasActiveFilters && (
                   <span className="ml-1 flex h-5 w-5 items-center justify-center rounded-full bg-[#D97853] text-xs text-white">
                     {Object.values(filters).filter((v) => v !== '').length}
@@ -240,56 +240,56 @@ export default function TaskBoard() {
               {showFilters && (
                 <div className="absolute right-full top-0 z-50 mr-2 min-w-[320px] rounded-xl border border-[#E6D8CE] bg-[#FFFCFA] p-3 shadow-[0_20px_32px_-28px_rgba(61,38,25,0.7)]">
                   <div className="mb-2 flex items-center justify-between">
-                    <span className="text-sm font-semibold text-slate-700">Filters</span>
+                    <span className="text-sm font-semibold text-slate-700">Bộ lọc</span>
                     {hasActiveFilters && (
                       <button
                         type="button"
                         onClick={() => setFilters(emptyFilters)}
                         className="text-xs font-medium text-red-600 hover:text-red-700"
                       >
-                        Clear all
+                        Xóa tất cả
                       </button>
                     )}
                   </div>
                   <div className="grid grid-cols-2 gap-2">
                     <div>
-                      <label className="mb-0.5 block text-xs font-medium text-slate-500">Search</label>
+                      <label className="mb-0.5 block text-xs font-medium text-slate-500">Tìm kiếm</label>
                       <input
                         type="text"
                         value={filters.search}
                         onChange={(e) => setFilters((f) => ({ ...f, search: e.target.value }))}
-                        placeholder="Task name..."
+                        placeholder="Tên công việc..."
                         className={selectClass + ' w-full'}
                       />
                     </div>
                     <div>
-                      <label className="mb-0.5 block text-xs font-medium text-slate-500">Member</label>
+                      <label className="mb-0.5 block text-xs font-medium text-slate-500">Thành viên</label>
                       <select
                         value={filters.assigneeId}
                         onChange={(e) => setFilters((f) => ({ ...f, assigneeId: e.target.value }))}
                         className={selectClass + ' w-full'}
                       >
-                        <option value="">All members</option>
+                        <option value="">Tất cả thành viên</option>
                         {members.map((m) => (
                           <option key={m.id} value={m.id}>{m.name}</option>
                         ))}
                       </select>
                     </div>
                     <div>
-                      <label className="mb-0.5 block text-xs font-medium text-slate-500">Priority</label>
+                      <label className="mb-0.5 block text-xs font-medium text-slate-500">Ưu tiên</label>
                       <select
                         value={filters.priority}
                         onChange={(e) => setFilters((f) => ({ ...f, priority: e.target.value }))}
                         className={selectClass + ' w-full'}
                       >
-                        <option value="">All</option>
-                        <option value="HIGH">High</option>
-                        <option value="MEDIUM">Medium</option>
-                        <option value="LOW">Low</option>
+                        <option value="">Tất cả</option>
+                        <option value="HIGH">Cao</option>
+                        <option value="MEDIUM">Trung bình</option>
+                        <option value="LOW">Thấp</option>
                       </select>
                     </div>
                     <div>
-                      <label className="mb-0.5 block text-xs font-medium text-slate-500">Deadline from</label>
+                      <label className="mb-0.5 block text-xs font-medium text-slate-500">Hạn từ</label>
                       <input
                         type="date"
                         value={filters.deadlineAfter}
@@ -298,7 +298,7 @@ export default function TaskBoard() {
                       />
                     </div>
                     <div className="col-span-2">
-                      <label className="mb-0.5 block text-xs font-medium text-slate-500">Deadline to</label>
+                      <label className="mb-0.5 block text-xs font-medium text-slate-500">Hạn đến</label>
                       <input
                         type="date"
                         value={filters.deadlineBefore}
@@ -308,12 +308,12 @@ export default function TaskBoard() {
                     </div>
                     <div className="col-span-2">
                       <label className="mb-0.5 block text-xs font-medium text-slate-500">
-                        Within N days (incomplete)
+                        Trong N ngày (chưa hoàn thành)
                       </label>
                       <input
                         type="number"
                         min={0}
-                        placeholder="e.g. 3 → tasks due in 3 days"
+                        placeholder="ví dụ: 3 → công việc đến hạn trong 3 ngày"
                         value={filters.deadlineWithinDays}
                         onChange={(e) => setFilters((f) => ({ ...f, deadlineWithinDays: e.target.value }))}
                         className={selectClass + ' w-full'}
@@ -329,7 +329,7 @@ export default function TaskBoard() {
               onClick={() => setIsAddOpen(true)}
               className="!bg-[#D97853] !py-1.5 !text-[13px] hover:!bg-[#C96B48]"
             >
-              <Plus className="mr-1 h-4 w-4" /> Add Task
+              <Plus className="mr-1 h-4 w-4" /> Thêm công việc
             </Button>
           </div>
           )}
@@ -351,18 +351,18 @@ export default function TaskBoard() {
             <div className="flex min-w-0 flex-1 flex-col overflow-hidden rounded-xl border border-[#E7D9CF] bg-[#FFFDFB]">
               <h3 className="flex shrink-0 items-center gap-2 border-b border-[#F0E5DD] px-4 py-3 text-base font-semibold text-slate-900">
                 <AlertTriangle className="h-4 w-4 text-rose-500" />
-                Overdue ({overdueTasks.length})
+                Quá hạn ({overdueTasks.length})
               </h3>
               <div className="ez-task-scrollbar flex-1 overflow-auto p-4">
                 {overdueTasks.length === 0 ? (
-                  <p className="text-sm text-slate-500">No overdue tasks.</p>
+                  <p className="text-sm text-slate-500">Không có công việc quá hạn.</p>
                 ) : (
                   <table className="w-full text-left text-sm">
                     <thead>
                       <tr className="border-b border-slate-200 text-slate-600">
-                        <th className="py-2 pr-3 font-semibold">Task</th>
-                        <th className="py-2 pr-3 font-semibold">Assignee</th>
-                        <th className="py-2 font-semibold">Due</th>
+                        <th className="py-2 pr-3 font-semibold">Công việc</th>
+                        <th className="py-2 pr-3 font-semibold">Người được giao</th>
+                        <th className="py-2 font-semibold">Hạn</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -392,18 +392,18 @@ export default function TaskBoard() {
             <div className="flex min-w-0 flex-1 flex-col overflow-hidden rounded-xl border border-[#E7D9CF] bg-[#FFFDFB]">
               <h3 className="flex shrink-0 items-center gap-2 border-b border-[#F0E5DD] px-4 py-3 text-base font-semibold text-slate-900">
                 <Clock className="h-4 w-4 text-amber-500" />
-                Due in 3 days ({dueSoonTasks.length})
+                Đến hạn trong 3 ngày ({dueSoonTasks.length})
               </h3>
               <div className="ez-task-scrollbar flex-1 overflow-auto p-4">
                 {dueSoonTasks.length === 0 ? (
-                  <p className="text-sm text-slate-500">No tasks due soon.</p>
+                  <p className="text-sm text-slate-500">Không có công việc sắp đến hạn.</p>
                 ) : (
                   <table className="w-full text-left text-sm">
                     <thead>
                       <tr className="border-b border-slate-200 text-slate-600">
-                        <th className="py-2 pr-3 font-semibold">Task</th>
-                        <th className="py-2 pr-3 font-semibold">Assignee</th>
-                        <th className="py-2 font-semibold">Due</th>
+                        <th className="py-2 pr-3 font-semibold">Công việc</th>
+                        <th className="py-2 pr-3 font-semibold">Người được giao</th>
+                        <th className="py-2 font-semibold">Hạn</th>
                       </tr>
                     </thead>
                     <tbody>
