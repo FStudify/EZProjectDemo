@@ -10,8 +10,8 @@ interface ChatPanelProps {
 }
 
 const channelLabels: Record<'task' | 'document', string> = {
-  task: 'Task Discussion',
-  document: 'Document Discussion',
+  task: 'Thảo luận công việc',
+  document: 'Thảo luận tài liệu',
 };
 
 export default function ChatPanel({ projectId, channel }: ChatPanelProps) {
@@ -53,7 +53,7 @@ export default function ChatPanel({ projectId, channel }: ChatPanelProps) {
           type="button"
           onClick={() => setIsOpen(true)}
           className="fixed right-0 top-1/2 z-40 flex h-14 w-8 -translate-y-1/2 items-center justify-center rounded-l-lg border border-r-0 border-slate-200 bg-white text-slate-500 shadow-lg transition-colors hover:bg-primary-50 hover:text-primary hover:border-primary/30"
-          title={`Open ${channelLabels[channel]}`}
+          title={`Mở ${channelLabels[channel]}`}
         >
           <MessageCircle className="h-5 w-5" />
         </button>
@@ -80,10 +80,10 @@ export default function ChatPanel({ projectId, channel }: ChatPanelProps) {
                 type="button"
                 onClick={() => setIsOpen(false)}
                 className="flex items-center gap-1 rounded-lg px-2 py-1.5 text-slate-500 transition-colors hover:bg-slate-100 hover:text-slate-700"
-                title="Close"
+                title="Đóng"
               >
                 <ChevronLeft className="h-4 w-4" />
-                <span className="text-xs font-medium">Close</span>
+                <span className="text-xs font-medium">Đóng</span>
               </button>
             </div>
 
@@ -92,7 +92,7 @@ export default function ChatPanel({ projectId, channel }: ChatPanelProps) {
               {messages.length === 0 && (
                 <div className="flex flex-col items-center justify-center py-10 text-slate-400">
                   <MessageCircle className="mb-2 h-8 w-8" />
-                  <p className="text-xs">No messages yet</p>
+                  <p className="text-xs">Chưa có tin nhắn</p>
                 </div>
               )}
               {messages.map((msg) => (
@@ -112,14 +112,14 @@ export default function ChatPanel({ projectId, channel }: ChatPanelProps) {
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   onKeyDown={(e) => e.key === 'Enter' && !e.shiftKey && handleSend()}
-                  placeholder="Type a message..."
+                  placeholder="Nhập tin nhắn..."
                   className="flex-1 rounded-lg border border-slate-300 px-3 py-2 text-sm placeholder:text-slate-400 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
                 />
                 <button
                   type="button"
                   onClick={handleSend}
                   className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-primary text-white transition-colors hover:bg-primary-dark"
-                  aria-label="Send"
+                  aria-label="Gửi"
                 >
                   <Send className="h-4 w-4" />
                 </button>

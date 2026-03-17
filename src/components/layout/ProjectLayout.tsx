@@ -2,13 +2,13 @@ import { Outlet, NavLink } from 'react-router-dom';
 import { Info, CheckSquare, FileText, Video, Users, MessageCircle, TrendingUp } from 'lucide-react';
 
 const projectTabs = [
-  { to: '', icon: Info, label: 'Overview' },
-  { to: 'tasks', icon: CheckSquare, label: 'Tasks' },
-  { to: 'meetings', icon: Video, label: 'Meetings' },
-  { to: 'documents', icon: FileText, label: 'Documents' },
-  { to: 'chat', icon: MessageCircle, label: 'Group Chat' },
-  { to: 'members', icon: Users, label: 'Members' },
-  { to: 'performance', icon: TrendingUp, label: 'Performance' },
+  { to: '', icon: Info, label: 'Tổng quan' },
+  { to: 'tasks', icon: CheckSquare, label: 'Công việc' },
+  { to: 'meetings', icon: Video, label: 'Cuộc họp' },
+  { to: 'documents', icon: FileText, label: 'Tài liệu' },
+  { to: 'chat', icon: MessageCircle, label: 'Trò chuyện nhóm' },
+  { to: 'members', icon: Users, label: 'Thành viên' },
+  { to: 'performance', icon: TrendingUp, label: 'Hiệu suất' },
 ] as const;
 
 export default function ProjectLayout() {

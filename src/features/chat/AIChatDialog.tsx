@@ -35,9 +35,14 @@ export default function AIChatDialog() {
 
   // Draggable state
   const [pos, setPos] = useState({ x: 0, y: 0 });
-  const [isDragging, setIsDragging] = useState(false);
-  const dragRef = useRef<{ startX: number; startY: number; origX: number; origY: number } | null>(null);
-  const btnRef = useRef<HTMLButtonElement>(null);
+  const dragRef = useRef<{
+    startX: number;
+    startY: number;
+    origX: number;
+    origY: number;
+    didMove: boolean;
+    toggleOnClick: boolean;
+  } | null>(null);
 
   useEffect(() => {
     if (isOpen && listRef.current) {
@@ -45,31 +50,49 @@ export default function AIChatDialog() {
     }
   }, [isOpen, messages]);
 
-  const handlePointerDown = useCallback((e: React.PointerEvent) => {
-    setIsDragging(false);
-    dragRef.current = { startX: e.clientX, startY: e.clientY, origX: pos.x, origY: pos.y };
-    (e.target as HTMLElement).setPointerCapture(e.pointerId);
-  }, [pos]);
+  const handlePointerDown = useCallback(
+    (e: React.PointerEvent) => {
+      const t = e.target as HTMLElement;
+      if (t.closest('button[aria-label="Close"]')) return;
+      const isButton = !!t.closest('button[aria-label*="AI chat"]');
+      const isHeader = !!t.closest('[data-drag-header]');
+      if (!isButton && !isHeader) return;
+      e.preventDefault();
+      dragRef.current = {
+        startX: e.clientX,
+        startY: e.clientY,
+        origX: pos.x,
+        origY: pos.y,
+        didMove: false,
+        toggleOnClick: isButton, // Chỉ toggle khi click nút trôi, không khi click header
+      };
+    },
+    [pos]
+  );
 
-  const handlePointerMove = useCallback((e: React.PointerEvent) => {
-    if (!dragRef.current) return;
-    const dx = e.clientX - dragRef.current.startX;
-    const dy = e.clientY - dragRef.current.startY;
-    if (Math.abs(dx) > 3 || Math.abs(dy) > 3) {
-      setIsDragging(true);
-    }
-    setPos({ x: dragRef.current.origX + dx, y: dragRef.current.origY + dy });
+  useEffect(() => {
+    const handleMove = (e: PointerEvent) => {
+      if (!dragRef.current) return;
+      const dx = e.clientX - dragRef.current.startX;
+      const dy = e.clientY - dragRef.current.startY;
+      if (Math.abs(dx) > 4 || Math.abs(dy) > 4) dragRef.current.didMove = true;
+      setPos({
+        x: dragRef.current.origX + dx,
+        y: dragRef.current.origY + dy,
+      });
+    };
+    const handleUp = () => {
+      const ref = dragRef.current;
+      dragRef.current = null;
+      if (ref && !ref.didMove && ref.toggleOnClick) setIsOpen((prev) => !prev);
+    };
+    document.addEventListener('pointermove', handleMove);
+    document.addEventListener('pointerup', handleUp);
+    return () => {
+      document.removeEventListener('pointermove', handleMove);
+      document.removeEventListener('pointerup', handleUp);
+    };
   }, []);
-
-  const handlePointerUp = useCallback(() => {
-    const wasDragging = isDragging;
-    dragRef.current = null;
-    // Only toggle if it was a click (no drag movement)
-    if (!wasDragging) {
-      setIsOpen((prev) => !prev);
-    }
-    setTimeout(() => setIsDragging(false), 0);
-  }, [isDragging]);
 
   const handleSend = () => {
     const trimmed = input.trim();
@@ -122,13 +145,10 @@ export default function AIChatDialog() {
     <>
       {/* Draggable floating button */}
       <button
-        ref={btnRef}
         type="button"
         style={btnStyle}
         onPointerDown={handlePointerDown}
-        onPointerMove={handlePointerMove}
-        onPointerUp={handlePointerUp}
-        className={`group relative flex h-14 w-14 cursor-grab items-center justify-center rounded-2xl bg-[linear-gradient(145deg,#163B72,#274C7D)] text-white shadow-[0_18px_34px_-14px_rgba(22,59,114,0.8)] transition-all duration-200 hover:-translate-y-[1px] hover:shadow-[0_22px_38px_-16px_rgba(22,59,114,0.85)] active:cursor-grabbing ${
+        className={`group relative flex h-14 w-14 cursor-grab items-center justify-center rounded-2xl bg-[linear-gradient(145deg,#163B72,#274C7D)] text-white shadow-[0_18px_34px_-14px_rgba(22,59,114,0.8)] transition-all duration-200 hover:-translate-y-[1px] hover:shadow-[0_22px_38px_-16px_rgba(22,59,114,0.85)] active:cursor-grabbing touch-none ${
           isOpen ? 'ring-4 ring-[#B8C9E2]' : ''
         }`}
         aria-label={isOpen ? 'Close AI chat' : 'Open AI chat'}
@@ -141,10 +161,15 @@ export default function AIChatDialog() {
       {isOpen && (
         <div
           style={chatStyle}
-          className="flex h-[500px] w-96 flex-col overflow-hidden rounded-2xl border border-[#D5E1F0] bg-white/95 shadow-[0_30px_48px_-24px_rgba(22,59,114,0.45)] backdrop-blur-xl"
+          className="flex h-[500px] w-96 flex-col overflow-hidden rounded-2xl border border-[#D5E1F0] bg-white/95 shadow-[0_30px_48px_-24px_rgba(22,59,114,0.45)] backdrop-blur-xl touch-none"
         >
-          {/* Header */}
-          <div className="flex items-center justify-between border-b border-[#274C7D]/20 bg-[linear-gradient(135deg,#163B72,#274C7D)] px-4 py-3 text-white">
+          {/* Header - kéo thả để di chuyển */}
+          <div
+            data-drag-header
+            role="presentation"
+            onPointerDown={handlePointerDown}
+            className="flex cursor-grab active:cursor-grabbing items-center justify-between border-b border-[#274C7D]/20 bg-[linear-gradient(135deg,#163B72,#274C7D)] px-4 py-3 text-white"
+          >
             <div className="flex items-center gap-2">
               <Sparkles className="h-5 w-5 text-[#DCE8F7]" aria-hidden />
               <h3 className="text-sm font-semibold text-white">AI Assistant</h3>

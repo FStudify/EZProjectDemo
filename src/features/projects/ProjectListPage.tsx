@@ -21,8 +21,8 @@ export default function ProjectListPage() {
     <div className="space-y-7">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
         <div>
-          <h1 className="text-[38px] font-extrabold tracking-[-0.03em] text-[#1F1F1F]">Projects</h1>
-          <p className="mt-1 text-sm text-[#6B7280]">Manage priorities, track progress, and keep every team aligned.</p>
+          <h1 className="text-[38px] font-extrabold tracking-[-0.03em] text-[#1F1F1F]">Dự án</h1>
+          <p className="mt-1 text-sm text-[#6B7280]">Quản lý ưu tiên, theo dõi tiến độ và đồng bộ cả nhóm.</p>
         </div>
 
         <Button
@@ -31,7 +31,7 @@ export default function ProjectListPage() {
           className="inline-flex items-center gap-2 rounded-xl !bg-[#D97853] px-5 py-2.5 text-[16px] font-semibold text-white shadow-[0_16px_26px_-18px_rgba(217,120,83,0.9)] hover:!bg-[#C96B48]"
         >
           <Plus className="h-[18px] w-[18px]" strokeWidth={2.2} />
-          New Project
+          Tạo dự án
         </Button>
       </div>
 
@@ -42,7 +42,7 @@ export default function ProjectListPage() {
               <BarChart3 className="h-5 w-5" />
             </span>
             <div>
-              <p className="text-xs font-medium uppercase tracking-[0.11em] text-[#9A8576]">Average Progress</p>
+              <p className="text-xs font-medium uppercase tracking-[0.11em] text-[#9A8576]">Tiến độ trung bình</p>
               <p className="text-xl font-bold text-[#1F1F1F]">{avgProgress}%</p>
             </div>
           </div>
@@ -54,7 +54,7 @@ export default function ProjectListPage() {
               <CheckCircle2 className="h-5 w-5" />
             </span>
             <div>
-              <p className="text-xs font-medium uppercase tracking-[0.11em] text-[#9A8576]">Healthy Projects</p>
+              <p className="text-xs font-medium uppercase tracking-[0.11em] text-[#9A8576]">Dự án ổn định</p>
               <p className="text-xl font-bold text-[#1F1F1F]">{healthyProjects}</p>
             </div>
           </div>
@@ -66,7 +66,7 @@ export default function ProjectListPage() {
               <Clock3 className="h-5 w-5" />
             </span>
             <div>
-              <p className="text-xs font-medium uppercase tracking-[0.11em] text-[#9A8576]">Due In 14 Days</p>
+              <p className="text-xs font-medium uppercase tracking-[0.11em] text-[#9A8576]">Đến hạn trong 14 ngày</p>
               <p className="text-xl font-bold text-[#1F1F1F]">{dueSoonProjects}</p>
             </div>
           </div>

@@ -3,20 +3,20 @@ import { Sparkles, Send, FileText, ListTodo, Lightbulb, User } from 'lucide-reac
 import type { Document } from '@/types';
 
 const SUGGESTED_PROMPTS = [
-  { id: 'summary', label: 'Summarize this document', icon: FileText },
-  { id: 'keypoints', label: 'Extract key points', icon: Lightbulb },
-  { id: 'tasks', label: 'Extract suggested tasks', icon: ListTodo },
+  { id: 'summary', label: 'Tóm tắt tài liệu', icon: FileText },
+  { id: 'keypoints', label: 'Trích ý chính', icon: Lightbulb },
+  { id: 'tasks', label: 'Gợi ý công việc cần làm', icon: ListTodo },
 ] as const;
 
 const MOCK_RESPONSES: Record<string, string> = {
   summary:
-    '**Summary:**\n\nThis document describes an e-commerce product app with pagination and cart management. The main objective is to build a scalable frontend application using React and TypeScript, featuring product listing, search, and state management for the shopping cart.',
+    '**Tóm tắt:**\n\nTài liệu mô tả ứng dụng sản phẩm thương mại điện tử với phân trang và quản lý giỏ hàng. Mục tiêu chính là xây dựng ứng dụng frontend mở rộng được bằng React và TypeScript, gồm danh sách sản phẩm, tìm kiếm và quản lý trạng thái giỏ hàng.',
   keypoints:
-    '**Key points:**\n\n• Build product list page with pagination\n• Implement product details view\n• Add cart state management\n• Integrate search and filters\n• Use React + TypeScript stack',
+    '**Các ý chính:**\n\n• Xây dựng trang danh sách sản phẩm với phân trang\n• Thực hiện trang chi tiết sản phẩm\n• Thêm quản lý trạng thái giỏ hàng\n• Tích hợp tìm kiếm và bộ lọc\n• Dùng React + TypeScript',
   tasks:
-    '**Suggested tasks:**\n\n• Build product list page\n• Implement product details\n• Add cart state and persistence\n• Create checkout flow\n• Add search and filter UI',
+    '**Gợi ý công việc:**\n\n• Xây dựng trang danh sách sản phẩm\n• Thực hiện chi tiết sản phẩm\n• Thêm trạng thái giỏ hàng và lưu trữ\n• Tạo quy trình thanh toán\n• Thêm giao diện tìm kiếm và lọc',
   default:
-    'Based on the document content, the main objective is to build an e-commerce product app with pagination and cart state. Key technologies include React, TypeScript, and Node.js.',
+    'Theo nội dung tài liệu, mục tiêu chính là xây dựng ứng dụng sản phẩm thương mại điện tử với phân trang và quản lý giỏ hàng. Công nghệ chính gồm React, TypeScript và Node.js.',
 };
 
 interface ChatMessage {
@@ -104,29 +104,29 @@ export default function DocumentAIAssistant({ document }: DocumentAIAssistantPro
   const hasMessages = messages.length > 0;
 
   return (
-    <div className="flex h-full flex-col border-l border-slate-200 bg-white">
+    <div className="flex h-full min-h-0 flex-col bg-white">
       {/* Header */}
       <div className="shrink-0 border-b border-slate-200 px-4 py-3">
         <div className="flex items-center gap-2">
           <Sparkles className="h-5 w-5 text-primary" />
-          <h3 className="font-semibold text-slate-900">AI Assistant</h3>
+          <h3 className="font-semibold text-slate-900">Trợ lý AI</h3>
         </div>
         <p className="mt-0.5 truncate text-xs text-slate-500">{document.name}</p>
       </div>
 
-      {/* Chat messages - min-h để khung space dài ra, chứa nhiều nội dung hơn */}
+      {/* Chat messages */}
       <div
         ref={scrollRef}
-        className="flex min-h-[720px] flex-1 flex-col overflow-y-auto px-4 py-4"
+        className="flex min-h-0 flex-1 flex-col overflow-y-auto px-4 py-4"
       >
         {!hasMessages && !loading && (
           <div className="flex min-h-full flex-col items-center justify-center py-12 text-center">
             <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
               <Sparkles className="h-6 w-6 text-primary" />
             </div>
-            <p className="text-sm font-medium text-slate-700">Ask anything about this document</p>
+            <p className="text-sm font-medium text-slate-700">Hỏi bất cứ điều gì về tài liệu này</p>
             <p className="mt-1 text-xs text-slate-500">
-              Summarize, extract key points, or get answers.
+              Tóm tắt, trích ý chính hoặc hỏi đáp nhanh.
             </p>
             <div className="mt-6 flex flex-wrap justify-center gap-2">
               {SUGGESTED_PROMPTS.map(({ id, label, icon: Icon }) => (
@@ -208,7 +208,7 @@ export default function DocumentAIAssistant({ document }: DocumentAIAssistantPro
                 handleSend();
               }
             }}
-            placeholder="Message AI..."
+            placeholder="Nhắn cho AI..."
             rows={1}
             className="w-full resize-none rounded-xl border border-slate-300 py-3 pl-4 pr-12 text-sm placeholder:text-slate-400 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
           />
@@ -217,14 +217,11 @@ export default function DocumentAIAssistant({ document }: DocumentAIAssistantPro
             onClick={() => handleSend()}
             disabled={loading || !input.trim()}
             className="absolute right-2 top-1/2 -translate-y-1/2 rounded-lg p-2 text-primary hover:bg-primary/10 disabled:opacity-40 disabled:hover:bg-transparent transition-colors"
-            aria-label="Send"
+            aria-label="Gửi"
           >
             <Send className="h-4 w-4" />
           </button>
         </div>
-        <p className="mt-2 text-center text-xs text-slate-400">
-          AI can make mistakes. Verify important information.
-        </p>
       </div>
     </div>
   );

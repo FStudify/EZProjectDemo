@@ -28,7 +28,7 @@ export default function ChatPage() {
       const generalRoom: ChatRoom = {
         id: `room-general-${projectId}`,
         projectId,
-        name: 'General',
+        name: 'Chung',
         type: 'general',
         members: project?.members.map((pm) => pm.member) ?? allMembers,
         createdAt: new Date().toISOString(),
@@ -84,7 +84,7 @@ export default function ChatPage() {
         const generalRoom: ChatRoom = {
           id: `room-general-${projectId}`,
           projectId,
-          name: 'General',
+          name: 'Chung',
           type: 'general',
           members,
           createdAt: new Date().toISOString(),
@@ -205,7 +205,7 @@ export default function ChatPage() {
             type="button"
             onClick={() => setShowCreateModal(true)}
             className="rounded-lg p-1.5 text-slate-500 transition-colors hover:bg-slate-100 hover:text-slate-700"
-            title="New group channel"
+            title="Tạo kênh nhóm mới"
           >
             <Plus className="h-5 w-5" />
           </button>
@@ -219,7 +219,7 @@ export default function ChatPage() {
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search conversations..."
+              placeholder="Tìm cuộc trò chuyện..."
               className="w-full rounded-lg border border-slate-200 bg-slate-50 py-2 pl-9 pr-3 text-sm placeholder:text-slate-400 focus:border-primary focus:bg-white focus:outline-none focus:ring-1 focus:ring-primary"
             />
           </div>
@@ -229,7 +229,7 @@ export default function ChatPage() {
         <div className="flex-1 overflow-y-auto px-2 py-1">
           {/* Channels */}
           <p className="mb-1 mt-2 px-2 text-xs font-semibold uppercase tracking-wider text-slate-400">
-            Channels
+            Kênh
           </p>
           {filteredChannels.map((room) => {
             const last = getLastMessage(room.id);
@@ -264,7 +264,7 @@ export default function ChatPage() {
 
           {/* Direct Messages - always show project members */}
           <p className="mb-1 mt-4 px-2 text-xs font-semibold uppercase tracking-wider text-slate-400">
-            Direct Messages
+            Tin nhắn trực tiếp
           </p>
           {filteredDmMembers.map((member) => {
             const dmRoom = getDmRoomForMember(member);
@@ -310,8 +310,8 @@ export default function ChatPage() {
                 <h3 className="text-sm font-bold text-slate-900">{activeRoom.name}</h3>
                 <p className="text-xs text-slate-500">
                   {activeRoom.type === 'direct'
-                    ? 'Direct message'
-                    : `${activeRoom.members.length} members`}
+                    ? 'Tin nhắn trực tiếp'
+                    : `${activeRoom.members.length} thành viên`}
                 </p>
               </div>
               <div className="flex -space-x-2">
@@ -337,8 +337,8 @@ export default function ChatPage() {
               {roomMessages.length === 0 && (
                 <div className="flex flex-col items-center justify-center py-16 text-slate-400">
                   <MessageCircle className="mb-3 h-10 w-10" />
-                  <p className="text-sm font-medium">No messages yet</p>
-                  <p className="text-xs">Start the conversation!</p>
+                  <p className="text-sm font-medium">Chưa có tin nhắn</p>
+                  <p className="text-xs">Bắt đầu trò chuyện nhé!</p>
                 </div>
               )}
               {roomMessages.map((msg) => (
@@ -359,10 +359,10 @@ export default function ChatPage() {
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   onKeyDown={(e) => e.key === 'Enter' && !e.shiftKey && handleSend()}
-                  placeholder={`Message ${activeRoom.name}...`}
+                  placeholder={`Nhắn cho ${activeRoom.name}...`}
                   className="min-w-0 flex-1 rounded-lg border border-slate-300 px-4 py-2.5 text-sm placeholder:text-slate-400 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
                 />
-                <Button variant="primary" size="md" onClick={handleSend} aria-label="Send">
+                <Button variant="primary" size="md" onClick={handleSend} aria-label="Gửi">
                   <Send className="h-4 w-4" aria-hidden />
                 </Button>
               </div>
@@ -370,7 +370,7 @@ export default function ChatPage() {
           </>
         ) : (
           <div className="flex flex-1 items-center justify-center text-slate-400">
-            <p>Select a conversation to start chatting</p>
+            <p>Chọn một cuộc trò chuyện để bắt đầu</p>
           </div>
         )}
       </div>
@@ -415,7 +415,7 @@ function CreateChannelModal({ members, projectMembers = [], onClose, onCreate }:
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm">
       <div className="w-full max-w-md rounded-2xl bg-white p-6 shadow-2xl">
         <div className="mb-5 flex items-center justify-between">
-          <h3 className="text-lg font-bold text-slate-900">New Group Channel</h3>
+          <h3 className="text-lg font-bold text-slate-900">Kênh nhóm mới</h3>
           <button
             type="button"
             onClick={onClose}
@@ -426,18 +426,18 @@ function CreateChannelModal({ members, projectMembers = [], onClose, onCreate }:
         </div>
 
         <div className="mb-4">
-          <label className="mb-1 block text-sm font-medium text-slate-700">Channel Name</label>
+          <label className="mb-1 block text-sm font-medium text-slate-700">Tên kênh</label>
           <input
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            placeholder="e.g. Design Team, Sprint 3..."
+            placeholder="VD: Nhóm thiết kế, Sprint 3..."
             className="w-full rounded-lg border border-slate-300 px-4 py-2.5 text-sm placeholder:text-slate-400 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
           />
         </div>
 
         <div className="mb-5">
-          <label className="mb-2 block text-sm font-medium text-slate-700">Add members</label>
+          <label className="mb-2 block text-sm font-medium text-slate-700">Thêm thành viên</label>
           <div className="max-h-48 space-y-1 overflow-y-auto rounded-lg border border-slate-200 p-2">
             {otherMembers.map((m) => {
               const selected = selectedIds.includes(m.id);
@@ -455,7 +455,7 @@ function CreateChannelModal({ members, projectMembers = [], onClose, onCreate }:
                     <p className="text-sm font-medium">{m.name}</p>
                     <p className="truncate text-xs text-slate-400">{m.email}</p>
                   </div>
-                  {selected && <Badge variant="primary">Selected</Badge>}
+                  {selected && <Badge variant="primary">Đã chọn</Badge>}
                 </button>
               );
             })}
@@ -464,7 +464,7 @@ function CreateChannelModal({ members, projectMembers = [], onClose, onCreate }:
 
         <div className="flex justify-end gap-2">
           <Button variant="ghost" size="md" onClick={onClose}>
-            Cancel
+            Hủy
           </Button>
           <Button
             variant="primary"
@@ -472,7 +472,7 @@ function CreateChannelModal({ members, projectMembers = [], onClose, onCreate }:
             onClick={handleSubmit}
             disabled={selectedIds.length === 0 || !name.trim()}
           >
-            Create Channel
+          Tạo kênh
           </Button>
         </div>
       </div>

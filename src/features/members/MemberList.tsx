@@ -9,9 +9,9 @@ import type { ProjectRole } from '@/types';
 const CURRENT_USER_ID = 'mem-1';
 
 const ROLE_OPTIONS: { value: ProjectRole; label: string }[] = [
-  { value: 'member', label: 'Member' },
-  { value: 'leader', label: 'Leader' },
-  { value: 'supervisor', label: 'Supervisor' },
+  { value: 'member', label: 'Thành viên' },
+  { value: 'leader', label: 'Trưởng nhóm' },
+  { value: 'supervisor', label: 'Giám sát' },
 ];
 
 export default function MemberList() {
@@ -58,17 +58,17 @@ export default function MemberList() {
   return (
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-        <h2 className="text-lg font-semibold text-slate-900">Member Management</h2>
+        <h2 className="text-lg font-semibold text-slate-900">Quản lý thành viên</h2>
         <Button variant="accent" size="md" className="inline-flex items-center gap-2">
           <UserPlus className="w-5 h-5" strokeWidth={2} />
-          Invite
+          Mời
         </Button>
       </div>
 
       <div className="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden">
         {members.length === 0 ? (
           <div className="py-16 text-center text-slate-500">
-            No members in this project.
+            Chưa có thành viên trong dự án.
           </div>
         ) : (
           <div className="overflow-x-auto">
@@ -76,14 +76,14 @@ export default function MemberList() {
               <thead>
                 <tr className="border-b border-slate-200 bg-slate-50/80">
                   <th className="py-3 px-4 text-xs font-semibold text-slate-600 uppercase tracking-wider">
-                    Member
+                    Thành viên
                   </th>
                   <th className="py-3 px-4 text-xs font-semibold text-slate-600 uppercase tracking-wider">
-                    Role
+                    Vai trò
                   </th>
                   {canManage && (
                     <th className="py-3 px-4 text-xs font-semibold text-slate-600 uppercase tracking-wider w-28">
-                      Actions
+                      Thao tác
                     </th>
                   )}
                 </tr>
@@ -121,7 +121,7 @@ export default function MemberList() {
                               type="button"
                               onClick={() => handleOpenEdit(member.id, role)}
                               className="rounded-lg p-2 text-slate-500 hover:bg-slate-100 hover:text-slate-700 transition-colors"
-                              title="Edit role"
+                              title="Sửa vai trò"
                             >
                               <Pencil className="h-4 w-4" />
                             </button>
@@ -130,7 +130,7 @@ export default function MemberList() {
                                 type="button"
                                 onClick={() => setKickConfirmId(member.id)}
                                 className="rounded-lg p-2 text-slate-500 hover:bg-red-50 hover:text-red-600 transition-colors"
-                                title="Remove from project"
+                                title="Xóa khỏi dự án"
                               >
                                 <LogOut className="h-4 w-4" />
                               </button>
@@ -150,11 +150,11 @@ export default function MemberList() {
       <Modal
         isOpen={!!editingId}
         onClose={() => setEditingId(null)}
-        title="Edit member role"
+        title="Sửa vai trò thành viên"
       >
         <div className="space-y-4">
           <div>
-            <label className="mb-1.5 block text-sm font-medium text-slate-700">Role</label>
+            <label className="mb-1.5 block text-sm font-medium text-slate-700">Vai trò</label>
             <select
               value={editRole}
               onChange={(e) => setEditRole(e.target.value as ProjectRole)}
@@ -169,10 +169,10 @@ export default function MemberList() {
           </div>
           <div className="flex justify-end gap-2">
             <Button variant="ghost" size="sm" onClick={() => setEditingId(null)}>
-              Cancel
+              Hủy
             </Button>
             <Button variant="primary" size="sm" onClick={handleSaveRole}>
-              Save
+              Lưu
             </Button>
           </div>
         </div>
@@ -182,22 +182,22 @@ export default function MemberList() {
       <Modal
         isOpen={!!kickConfirmId}
         onClose={() => setKickConfirmId(null)}
-        title="Remove member"
+        title="Xóa thành viên"
       >
         <div className="space-y-4">
           <p className="text-slate-600 text-sm">
-            Remove this member from the project? They will lose access to all project content.
+            Xóa thành viên này khỏi dự án? Người này sẽ mất quyền truy cập toàn bộ nội dung dự án.
           </p>
           <div className="flex justify-end gap-2">
             <Button variant="ghost" size="sm" onClick={() => setKickConfirmId(null)}>
-              Cancel
+              Hủy
             </Button>
             <Button
               variant="danger"
               size="sm"
               onClick={() => kickConfirmId && handleKick(kickConfirmId)}
             >
-              Remove
+              Xóa
             </Button>
           </div>
         </div>

@@ -79,8 +79,8 @@ export default function DocumentList() {
   };
 
   const tabs: { id: TabId; label: string; icon: typeof FileStack }[] = [
-    { id: 'documents', label: 'Documents', icon: FileStack },
-    { id: 'ai', label: 'AI Assistant', icon: Sparkles },
+    { id: 'documents', label: 'Tài liệu', icon: FileStack },
+    { id: 'ai', label: 'Trợ lý AI', icon: Sparkles },
   ];
 
   return (
@@ -119,7 +119,7 @@ export default function DocumentList() {
               onClick={() => fileInputRef.current?.click()}
             >
               <Upload className="mr-2 h-4 w-4" />
-              Upload
+              Tải lên
             </Button>
           </div>
         )}
@@ -135,11 +135,11 @@ export default function DocumentList() {
                   <table className="w-full">
                     <thead>
                       <tr className="border-b border-slate-200 bg-slate-50">
-                        <th className="text-left py-3 px-4 text-sm font-medium text-slate-600">File</th>
-                        <th className="text-left py-3 px-4 text-sm font-medium text-slate-600">Size</th>
-                        <th className="text-left py-3 px-4 text-sm font-medium text-slate-600">Uploaded by</th>
-                        <th className="text-left py-3 px-4 text-sm font-medium text-slate-600">Date</th>
-                        <th className="text-right py-3 px-4 text-sm font-medium text-slate-600">Actions</th>
+                        <th className="text-left py-3 px-4 text-sm font-medium text-slate-600">Tệp</th>
+                        <th className="text-left py-3 px-4 text-sm font-medium text-slate-600">Dung lượng</th>
+                        <th className="text-left py-3 px-4 text-sm font-medium text-slate-600">Người tải lên</th>
+                        <th className="text-left py-3 px-4 text-sm font-medium text-slate-600">Ngày</th>
+                        <th className="text-right py-3 px-4 text-sm font-medium text-slate-600">Thao tác</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -179,25 +179,25 @@ export default function DocumentList() {
                                   href={doc.fileUrl}
                                   download={doc.name}
                                   className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-100 transition-colors"
-                                  aria-label={`Download ${doc.name}`}
+                                  aria-label={`Tải xuống ${doc.name}`}
                                 >
                                   <Download className="w-4 h-4" strokeWidth={2} />
-                                  Download
+                                  Tải xuống
                                 </a>
                               ) : uploadedBlobs.has(doc.id) ? (
                                 <a
                                   href={URL.createObjectURL(uploadedBlobs.get(doc.id)!)}
                                   download={doc.name}
                                   className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-100 transition-colors"
-                                  aria-label={`Download ${doc.name}`}
+                                  aria-label={`Tải xuống ${doc.name}`}
                                 >
                                   <Download className="w-4 h-4" strokeWidth={2} />
-                                  Download
+                                  Tải xuống
                                 </a>
                               ) : (
                                 <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm font-medium text-slate-400">
                                   <Download className="w-4 h-4" strokeWidth={2} />
-                                  Download
+                                  Tải xuống
                                 </span>
                               )}
                             </td>
@@ -209,7 +209,7 @@ export default function DocumentList() {
                 </div>
                 {documents.length === 0 && (
                   <div className="py-16 text-center text-slate-500">
-                    No documents in this project yet.
+                    Chưa có tài liệu trong dự án.
                   </div>
                 )}
               </div>

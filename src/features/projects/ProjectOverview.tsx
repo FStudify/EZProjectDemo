@@ -11,7 +11,7 @@ export default function ProjectOverview() {
   if (!project) {
     return (
       <div className="text-center py-16">
-        <p className="text-slate-600">Project not found.</p>
+        <p className="text-slate-600">Không tìm thấy dự án.</p>
       </div>
     );
   }
@@ -34,23 +34,23 @@ export default function ProjectOverview() {
         {/* Task stats */}
         <div className="bg-white rounded-xl shadow-sm border border-slate-100 p-6">
           <h3 className="text-sm font-medium text-slate-500 uppercase tracking-wide mb-4">
-            Task Progress
+            Tiến độ công việc
           </h3>
           <div className="space-y-3">
             <div className="flex justify-between text-sm">
-              <span className="text-slate-600">Total</span>
+              <span className="text-slate-600">Tổng</span>
               <span className="font-semibold text-slate-900">
                 {project.totalTasks}
               </span>
             </div>
             <div className="flex justify-between text-sm">
-              <span className="text-slate-600">Completed</span>
+              <span className="text-slate-600">Đã hoàn thành</span>
               <span className="font-semibold text-emerald-600">
                 {project.completedTasks}
               </span>
             </div>
             <div className="flex justify-between text-sm">
-              <span className="text-slate-600">Remaining</span>
+              <span className="text-slate-600">Còn lại</span>
               <span className="font-semibold text-amber-600">
                 {remainingTasks}
               </span>
@@ -61,7 +61,7 @@ export default function ProjectOverview() {
         {/* Deadline */}
         <div className="bg-white rounded-xl shadow-sm border border-slate-100 p-6">
           <h3 className="text-sm font-medium text-slate-500 uppercase tracking-wide mb-4">
-            Deadline
+            Hạn chót
           </h3>
           <div className="flex items-center gap-3">
             <div className="p-2.5 rounded-lg bg-slate-100 text-slate-600">
@@ -82,7 +82,7 @@ export default function ProjectOverview() {
         <div className="bg-white rounded-xl shadow-sm border border-slate-100 p-6 md:col-span-2 lg:col-span-1">
           <h3 className="text-sm font-medium text-slate-500 uppercase tracking-wide mb-4 flex items-center gap-2">
             <Users className="w-4 h-4" strokeWidth={2} />
-            Members
+            Thành viên
           </h3>
           <div className="space-y-3">
             {project.members.map(({ member, role, isOwner }) => (

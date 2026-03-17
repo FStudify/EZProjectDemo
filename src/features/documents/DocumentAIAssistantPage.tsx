@@ -127,7 +127,7 @@ export default function DocumentAIAssistantPage({
 
   return (
     <div
-      className="grid h-[calc(100vh-10rem)] w-full min-w-0 overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm"
+      className="grid h-[calc(100vh-6rem)] w-full min-w-0 overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm"
       style={{
         gridTemplateColumns: `${docListWidth}px 8px 1fr 8px ${aiPanelWidth}px`,
       }}
@@ -195,7 +195,7 @@ export default function DocumentAIAssistantPage({
           <DocumentAIAssistant document={selectedDoc} />
         ) : (
           <div className="flex h-full flex-col items-center justify-center border-l border-slate-200 bg-slate-50/50 p-6 text-center">
-            <p className="text-sm text-slate-500">Select a document to chat with AI</p>
+            <p className="text-sm text-slate-500">Chọn một tài liệu để chat với AI</p>
           </div>
         )}
       </div>

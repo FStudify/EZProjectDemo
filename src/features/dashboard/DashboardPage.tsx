@@ -72,7 +72,7 @@ export default function DashboardPage() {
               <p className="text-2xl font-bold text-slate-900">
                 {mockProjects.length}
               </p>
-              <p className="text-sm text-slate-600">Active Projects</p>
+              <p className="text-sm text-slate-600">Dự án đang hoạt động</p>
             </div>
           </div>
         </div>
@@ -85,7 +85,7 @@ export default function DashboardPage() {
               <p className="text-2xl font-bold text-slate-900">
                 {mockTasks.length}
               </p>
-              <p className="text-sm text-slate-600">Total Tasks</p>
+              <p className="text-sm text-slate-600">Tổng công việc</p>
             </div>
           </div>
         </div>
@@ -98,7 +98,7 @@ export default function DashboardPage() {
               <p className="text-2xl font-bold text-slate-900">
                 {completedCount}
               </p>
-              <p className="text-sm text-slate-600">Completed Tasks</p>
+              <p className="text-sm text-slate-600">Công việc đã hoàn thành</p>
             </div>
           </div>
         </div>
@@ -109,7 +109,7 @@ export default function DashboardPage() {
         {/* Recent Projects - 2/3 */}
         <div className="lg:col-span-2">
           <h2 className="text-lg font-semibold text-slate-900 mb-4">
-            Recent Projects
+            Dự án gần đây
           </h2>
           <div className="space-y-4">
             {mockProjects.map((project: Project) => (
@@ -124,25 +124,25 @@ export default function DashboardPage() {
           <div className="flex-1 min-h-0 flex flex-col bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden">
             <h2 className="text-base font-semibold text-slate-900 px-4 py-3 border-b border-slate-100 flex items-center gap-2 shrink-0">
               <AlertTriangle className="h-4 w-4 text-rose-500" />
-              Overdue
+              Quá hạn
             </h2>
             <div className="flex-1 min-h-0 overflow-auto">
               {overdue.length === 0 ? (
                 <div className="p-6 text-center text-slate-500 text-sm">
-                  No overdue tasks.
+                  Không có công việc quá hạn.
                 </div>
               ) : (
                 <table className="w-full text-left min-w-[200px]">
                   <thead>
                     <tr className="border-b border-slate-200 bg-slate-50/80">
                       <th className="py-2 px-3 text-xs font-semibold text-slate-600 uppercase tracking-wider">
-                        Project
+                        Dự án
                       </th>
                       <th className="py-2 px-3 text-xs font-semibold text-slate-600 uppercase tracking-wider">
-                        Task
+                        Công việc
                       </th>
                       <th className="py-2 px-3 text-xs font-semibold text-slate-600 uppercase tracking-wider">
-                        Due
+                        Hạn
                       </th>
                     </tr>
                   </thead>
@@ -168,25 +168,25 @@ export default function DashboardPage() {
           <div className="flex-1 min-h-0 flex flex-col bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden">
             <h2 className="text-base font-semibold text-slate-900 px-4 py-3 border-b border-slate-100 flex items-center gap-2 shrink-0">
               <Clock className="h-4 w-4 text-amber-500" />
-              Due in 3 days
+              Đến hạn trong 3 ngày
             </h2>
             <div className="flex-1 min-h-0 overflow-auto">
               {dueSoon.length === 0 ? (
                 <div className="p-6 text-center text-slate-500 text-sm">
-                  No tasks due soon.
+                  Không có công việc sắp đến hạn.
                 </div>
               ) : (
                 <table className="w-full text-left min-w-[200px]">
                   <thead>
                     <tr className="border-b border-slate-200 bg-slate-50/80">
                       <th className="py-2 px-3 text-xs font-semibold text-slate-600 uppercase tracking-wider">
-                        Project
+                        Dự án
                       </th>
                       <th className="py-2 px-3 text-xs font-semibold text-slate-600 uppercase tracking-wider">
-                        Task
+                        Công việc
                       </th>
                       <th className="py-2 px-3 text-xs font-semibold text-slate-600 uppercase tracking-wider">
-                        Due
+                        Hạn
                       </th>
                     </tr>
                   </thead>

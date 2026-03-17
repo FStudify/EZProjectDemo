@@ -20,13 +20,13 @@ import { Avatar } from '@/components/ui';
 import { useSidebar } from './SidebarContext';
 
 const projectSubNav = [
-  { suffix: '', icon: Info, label: 'Overview' },
-  { suffix: '/tasks', icon: CheckSquare, label: 'Tasks' },
-  { suffix: '/meetings', icon: Video, label: 'Meetings' },
-  { suffix: '/documents', icon: FileText, label: 'Documents' },
-  { suffix: '/chat', icon: MessageCircle, label: 'Group Chat' },
-  { suffix: '/members', icon: Users, label: 'Members' },
-  { suffix: '/performance', icon: TrendingUp, label: 'Performance' },
+  { suffix: '', icon: Info, label: 'Tổng quan' },
+  { suffix: '/tasks', icon: CheckSquare, label: 'Công việc' },
+  { suffix: '/meetings', icon: Video, label: 'Cuộc họp' },
+  { suffix: '/documents', icon: FileText, label: 'Tài liệu' },
+  { suffix: '/chat', icon: MessageCircle, label: 'Trò chuyện nhóm' },
+  { suffix: '/members', icon: Users, label: 'Thành viên' },
+  { suffix: '/performance', icon: TrendingUp, label: 'Hiệu suất' },
 ] as const;
 
 export default function Sidebar() {
@@ -123,7 +123,7 @@ export default function Sidebar() {
             title="Dashboard"
           >
             <LayoutDashboard className="h-5 w-5 shrink-0" aria-hidden />
-            {!collapsed && 'Dashboard'}
+            {!collapsed && 'Tổng quan'}
           </NavLink>
 
           {/* Projects */}
@@ -138,7 +138,7 @@ export default function Sidebar() {
             <FolderKanban className="h-5 w-5 shrink-0" aria-hidden />
             {!collapsed && (
               <>
-                Projects
+                Dự án
                 <ChevronDown
                   className={`ml-auto h-4 w-4 shrink-0 transition-transform duration-200 ${
                     isInProjects ? 'rotate-0' : '-rotate-90'
@@ -166,7 +166,7 @@ export default function Sidebar() {
                           ? 'flex justify-center rounded-lg p-2 text-[#D7B8A5]/75'
                           : 'flex cursor-not-allowed items-center gap-2.5 rounded-lg px-3 py-2 text-[13px] font-medium text-[#D7B8A5]/75'
                       }
-                      title="Select a project first"
+                      title="Vui lòng chọn dự án trước"
                     >
                       <Icon className="h-4 w-4 shrink-0" aria-hidden />
                       {!collapsed && label}
@@ -197,17 +197,17 @@ export default function Sidebar() {
         {/* Tools */}
         <div className={`mt-6 border-t border-white/18 pt-4 ${collapsed ? 'flex justify-center' : ''}`}>
           {collapsed ? (
-            <div className="flex items-center justify-center rounded-lg p-2 text-[#F9EADF]" title="AI Chat">
+            <div className="flex items-center justify-center rounded-lg p-2 text-[#F9EADF]" title="Trợ lý AI">
               <Bot className="h-4 w-4 shrink-0" aria-hidden />
             </div>
           ) : (
             <>
               <p className="mb-2 px-4 text-xs font-semibold uppercase tracking-[0.12em] text-[#F8E4D6]/88">
-                Tools
+                Công cụ
               </p>
               <p className="flex items-center gap-3 rounded-lg bg-white/11 px-4 py-2 text-sm text-[#FFF5ED]">
                 <Bot className="h-4 w-4 shrink-0" aria-hidden />
-                AI Chat (bottom-right)
+                Trợ lý AI (góc dưới bên phải)
               </p>
             </>
           )}

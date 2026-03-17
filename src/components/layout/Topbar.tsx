@@ -79,16 +79,16 @@ export default function Topbar({ title }: TopbarProps) {
           />
           <input
             type="search"
-            placeholder="Search..."
+            placeholder="Tìm kiếm..."
             className="h-10 w-52 rounded-xl border border-[#E8D8CF] bg-[#F8F3EE] pl-9 pr-3 text-sm text-[#1F1F1F] placeholder:text-[#8E857D] shadow-[inset_0_1px_1px_rgba(255,255,255,0.8)] transition-all duration-200 focus:border-[#D97853] focus:bg-white focus:outline-none focus:ring-4 focus:ring-[#D97853]/16 lg:w-64"
-            aria-label="Search"
+            aria-label="Tìm kiếm"
           />
         </div>
 
         <button
           type="button"
           className="relative inline-flex h-10 w-10 items-center justify-center rounded-xl border border-[#E6D6CC] bg-white text-[#4F637F] transition-all duration-200 hover:-translate-y-[1px] hover:border-[#D8C8BE] hover:bg-[#F8F2ED] hover:text-[#163B72]"
-          aria-label="Notifications"
+          aria-label="Thông báo"
         >
           <Bell className="h-[18px] w-[18px]" aria-hidden />
           <span
@@ -104,7 +104,7 @@ export default function Topbar({ title }: TopbarProps) {
             className="rounded-full ring-2 ring-[#DDE7F4] transition-all hover:ring-[#C8DAEE] focus:outline-none focus:ring-4 focus:ring-[#D97853]/18"
             aria-haspopup="menu"
             aria-expanded={isMenuOpen}
-            aria-label="Open user menu"
+            aria-label="Mở menu tài khoản"
           >
             <Avatar name={user?.displayName ?? 'User'} size="sm" />
           </button>
@@ -121,7 +121,7 @@ export default function Topbar({ title }: TopbarProps) {
                 role="menuitem"
               >
                 <UserPen className="h-4 w-4" />
-                Edit profile
+                Sửa hồ sơ
               </button>
               <button
                 type="button"
@@ -133,7 +133,7 @@ export default function Topbar({ title }: TopbarProps) {
                 role="menuitem"
               >
                 <LogOut className="h-4 w-4" />
-                Sign out
+                Đăng xuất
               </button>
             </div>
           )}
@@ -145,7 +145,7 @@ export default function Topbar({ title }: TopbarProps) {
       <Modal
         isOpen={isProfileOpen}
         onClose={() => setIsProfileOpen(false)}
-        title="Edit Profile"
+        title="Sửa hồ sơ"
         size="sm"
         panelClassName="!rounded-2xl !border !border-[#E8D8CF] !bg-[#FFFDFB]"
         headerClassName="!border-b-[#F1E3DA] !bg-gradient-to-r !from-[#FFF7F2] !to-[#FFFDFB]"
@@ -159,14 +159,14 @@ export default function Topbar({ title }: TopbarProps) {
               </div>
               <div className="min-w-0">
                 <p className="truncate text-sm font-semibold text-[#2B2826]">{displayName || user?.displayName || 'User'}</p>
-                <p className="truncate text-xs text-[#7D6F66]">{email || user?.email || 'No email set'}</p>
+                <p className="truncate text-xs text-[#7D6F66]">{email || user?.email || 'Chưa đặt email'}</p>
               </div>
             </div>
           </div>
 
           <div>
             <label htmlFor="topbar-display-name" className="mb-1.5 block text-sm font-medium text-[#4B433D]">
-              Display name
+              Tên hiển thị
             </label>
             <div className="relative">
               <UserCircle2
@@ -177,7 +177,7 @@ export default function Topbar({ title }: TopbarProps) {
                 id="topbar-display-name"
                 value={displayName}
                 onChange={(e) => setDisplayName(e.target.value)}
-                placeholder="Your display name"
+                placeholder="Tên hiển thị của bạn"
                 className="h-11 w-full rounded-xl border border-[#E3D4C9] bg-white pl-9 pr-3 text-sm text-[#2C2825] placeholder:text-[#B7A79C] shadow-[inset_0_1px_1px_rgba(255,255,255,0.85)] focus:border-[#D97853] focus:outline-none focus:ring-4 focus:ring-[#D97853]/15"
               />
             </div>
@@ -211,7 +211,7 @@ export default function Topbar({ title }: TopbarProps) {
               onClick={() => setIsProfileOpen(false)}
               className="!rounded-xl !border-[#DFCEC2] !text-[#6A5E56] hover:!bg-[#F7EFEA]"
             >
-              Cancel
+              Hủy
             </Button>
             <Button
               variant="accent"
@@ -220,7 +220,7 @@ export default function Topbar({ title }: TopbarProps) {
               disabled={!canSaveProfile}
               className="!rounded-xl !px-4"
             >
-              Save changes
+              Lưu thay đổi
             </Button>
           </div>
         </div>
